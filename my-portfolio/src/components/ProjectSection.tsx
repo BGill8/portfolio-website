@@ -33,7 +33,7 @@ const ProjectsSection = () => {
             </p>
             <div className="flex space-x-6">
               {project.githubUrl && (
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-5 rounded-lg transition-colors shadow-md">
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg transition-colors shadow-md">
                   <BsGithub className="w-5 h-5" />
                   <span>GitHub Repo</span>
                 </a>
