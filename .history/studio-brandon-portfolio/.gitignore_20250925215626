@@ -29,5 +29,5 @@
 *.local
 
 # History
-./.history/
-./.history/*
+.history/
+.history/*
