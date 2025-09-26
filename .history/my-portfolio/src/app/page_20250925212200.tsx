@@ -20,21 +20,21 @@ const Home = () => {
       <section className="text-center my-20 md:my-32">
         <div className="mb-4">
           {/* Replace with your image */}
-          {/* <div className="w-24 h-24 mx-auto bg-gray-600 rounded-full flex items-center justify-center text-gray-300 text-sm">
+          <div className="w-24 h-24 mx-auto bg-gray-600 rounded-full flex items-center justify-center text-gray-300 text-sm">
             [Your Pic]
-          </div> */}
+          </div>
         </div>
-        {/* <p className="text-xl text-gray-300 mb-2">Hello, I'm Brandon Gill</p> */}
+        <p className="text-xl text-gray-300 mb-2">Hello, I'm Brandon Gill 👋, creating</p>
         <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 transition-opacity duration-1000 ease-in-out">
-            Hi, I'm Brandon Gill
-          </span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 transition-opacity duration-1000 ease-in-out">
+            {words[currentWordIndex]}
+          </span> experiences,<br />
+          results & stories.
         </h1>
         <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8">
-          Third Year Computer Science Student at Oregon State University
-          Specializing in Artificial Intelligence
+          A passionate Web Developer with a knack for building dynamic, user-friendly, and performant web applications.
         </p>
-        <a href="/path-to-your-resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
+        <a href="/path-to-your-resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
           View Resume
         </a>
       </section>

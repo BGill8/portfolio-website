@@ -1,6 +1,3 @@
-'use client';
-import ProjectsSection from '@/components/ProjectSection';
-import SkillsSection from '@/components/SkillsSection';
 import { useEffect, useState } from 'react'; // Import useEffect and useState for dynamic text
 
 const Home = () => {
@@ -20,21 +17,21 @@ const Home = () => {
       <section className="text-center my-20 md:my-32">
         <div className="mb-4">
           {/* Replace with your image */}
-          {/* <div className="w-24 h-24 mx-auto bg-gray-600 rounded-full flex items-center justify-center text-gray-300 text-sm">
+          <div className="w-24 h-24 mx-auto bg-gray-600 rounded-full flex items-center justify-center text-gray-300 text-sm">
             [Your Pic]
-          </div> */}
+          </div>
         </div>
-        {/* <p className="text-xl text-gray-300 mb-2">Hello, I'm Brandon Gill</p> */}
+        <p className="text-xl text-gray-300 mb-2">Hello, I'm [Your Name] 👋, creating</p>
         <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 transition-opacity duration-1000 ease-in-out">
-            Hi, I'm Brandon Gill
-          </span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 transition-opacity duration-1000 ease-in-out">
+            {words[currentWordIndex]}
+          </span> experiences,<br />
+          results & stories.
         </h1>
         <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8">
-          Third Year Computer Science Student at Oregon State University
-          Specializing in Artificial Intelligence
+          A passionate Web Developer with a knack for building dynamic, user-friendly, and performant web applications.
         </p>
-        <a href="/path-to-your-resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
+        <a href="/path-to-your-resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
           View Resume
         </a>
       </section>
@@ -84,7 +81,30 @@ const Home = () => {
 
       <SkillsSection />
 
-      <ProjectsSection />
+      {/* Projects Section - Placeholder for now, will create a component */}
+      <section className="my-20 md:my-32">
+        <h2 className="text-3xl font-bold text-white mb-12 text-center">Selected Work</h2>
+        {/* Dynamic projects will be rendered here */}
+        {/* Example Project Card */}
+        <div className="bg-gray-800 rounded-lg shadow-xl border border-gray-700 p-6 mb-8 transform transition duration-300 hover:scale-[1.01] hover:shadow-2xl">
+          <h3 className="text-2xl font-semibold text-white mb-2">Project Title</h3>
+          <p className="text-gray-400 text-sm mb-4">
+            <span className="font-semibold text-gray-300">Technologies:</span> Next.js, TypeScript, Tailwind CSS
+          </p>
+          {/* Image goes here */}
+          <div className="w-full h-64 bg-gray-700 rounded-md mb-4 flex items-center justify-center text-gray-400">
+            Project Image Placeholder
+          </div>
+          <p className="text-gray-300 mb-4">
+            A brief description of the project, highlighting its purpose, your role, and key features.
+          </p>
+          <div className="flex space-x-4">
+            <a href="https://github.com/yourusername/project-repo" target="_blank" rel="noopener noreferrer" className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">GitHub Repo</a>
+            <a href="https://live-demo.vercel.app" target="_blank" rel="noopener noreferrer" className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">Live Demo</a>
+          </div>
+        </div>
+        {/* More project cards... */}
+      </section>
 
       {/* Contact Section */}
       <section className="text-center my-20 md:my-32">

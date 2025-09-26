@@ -6,14 +6,17 @@ const Navbar = () => {
       <div className="flex items-center">
         <Link href="/" className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-gray-600 rounded-lg" />
-          <span className="text-xl font-semibold">Brandon Gill</span>
+          <span className="text-xl font-semibold">Your Name</span>
         </Link>
       </div>
       <div className="flex space-x-6">
-        <Link href="/about" className="hover:text-gray-400 transition-colors">
-          About Me
+        <Link href="/projects" className="hover:text-gray-400 transition-colors">
+          Work
         </Link>
-        <a href="https://linkedin.com/in/brandonkngill" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">
+        <Link href="/about" className="hover:text-gray-400 transition-colors">
+          Info
+        </Link>
+        <a href="https://linkedin.com/in/yourlinkedin" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">
           LinkedIn
         </a>
         <a href="/path-to-your-resume.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">

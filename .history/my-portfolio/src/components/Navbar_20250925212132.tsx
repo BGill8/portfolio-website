@@ -11,7 +11,7 @@ const Navbar = () => {
       </div>
       <div className="flex space-x-6">
         <Link href="/about" className="hover:text-gray-400 transition-colors">
-          About Me
+          Info
         </Link>
         <a href="https://linkedin.com/in/brandonkngill" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">
           LinkedIn
