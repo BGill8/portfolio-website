@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { client } from '@/lib/sanity';
+import { PortableText } from '@portabletext/react';
 
 // Define your Experience type to match your Sanity schema
 type SanityExperience = {
@@ -57,9 +58,9 @@ const ExperienceSection = () => {
               <span className="text-gray-500 text-sm">{exp.dates}</span>
             </div>
             {/* You'll need a separate component to render Sanity's Portable Text */}
-            <p className="text-gray-300">
-              {exp.description}
-            </p>
+            <div className="description">
+              <PortableText value={exp.description} />
+            </div>
           </div>
         ))}
       </div>
