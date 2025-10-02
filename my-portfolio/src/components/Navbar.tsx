@@ -30,7 +30,7 @@ const Navbar = () => {
           {/* We use a <button> for accessibility, as this is an interactive element */}
           <button 
             onClick={handleImageClick} 
-            className="w-8 h-8 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-8 h-8 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500 hover:cursor-pointer"
             aria-label="Change profile picture"
           >
             <Image

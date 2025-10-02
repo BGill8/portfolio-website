@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Layout from '@/components/Layout';
 import Navbar from '@/components/Navbar';
+import CustomCursor from '@/components/CustomCursor';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <CustomCursor />
         <Navbar />
         <Layout>{children}</Layout>
       </body>
