@@ -65,9 +65,9 @@ const Home = async () => {
           Send me an Email
         </a>
         <div className="flex justify-center space-x-6 mt-8">
-          <a href="https://linkedin.com/in/yourlinkedin" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-white transition-colors">LinkedIn</a>
-          <a href="https://github.com/BGill8" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-white transition-colors">GitHub</a>
-          <a href="https://instagram.com/brandonkngill" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-white transition-colors">Instagram</a>
+          <a href="https://linkedin.com/in/yourlinkedin" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-blue-500 transition-colors">LinkedIn</a>
+          <a href="https://github.com/BGill8" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-blue-500 transition-colors">GitHub</a>
+          <a href="https://instagram.com/brandonkngill" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-blue-500 transition-colors">Instagram</a>
         </div>
       </section>
     </div>
