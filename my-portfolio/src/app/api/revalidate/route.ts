@@ -22,8 +22,13 @@ export async function POST(req: NextRequest) {
     revalidateTag('sanity')
 
     return NextResponse.json({ revalidated: true, now: Date.now() })
-  } catch (err: any) {
+  } catch (err) {
     console.error(err)
-    return new Response(err.message, { status: 500 })
+    // Check if the caught object is an instance of Error
+    if (err instanceof Error) {
+      return new Response(err.message, { status: 500 })
+    }
+    // If it's not an Error instance, return a generic message
+    return new Response('An unknown error occurred', { status: 500 })
   }
 }
