@@ -1,7 +1,3 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import { client } from '@/lib/sanity';
 import { PortableText } from '@portabletext/react';
 
 // Define your Experience type to match your Sanity schema
@@ -14,36 +10,7 @@ type SanityExperience = {
   description: any[]; // Sanity Portable Text
 };
 
-async function fetchExperience() {
-  // Get all documents of type 'experience', sorted by date
-  const experience = await client.fetch(`*[_type == "experience"] | order(dates desc){
-    _id,
-    title,
-    organization,
-    location,
-    dates,
-    description
-  }`);
-  return experience;
-}
-
-const ExperienceSection = () => {
-  const [experienceData, setExperienceData] = useState<SanityExperience[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function getExperience() {
-      const fetchedExperience: SanityExperience[] = await fetchExperience();
-      setExperienceData(fetchedExperience);
-      setLoading(false);
-    }
-    getExperience();
-  }, []);
-
-  if (loading) {
-    return <p className="text-center text-gray-400">Loading experience...</p>;
-  }
-
+const ExperienceSection = ({ experienceData }: { experienceData: SanityExperience[] }) => {
   return (
     <section className="my-20 md:my-32">
       <h2 className="text-3xl font-bold text-white mb-12 text-center">Experience</h2>

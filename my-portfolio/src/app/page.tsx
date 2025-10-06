@@ -10,9 +10,9 @@ const Home = async () => {
   // Fetch all data in one go
   const data = await client.fetch(`{
     "about": *[_type == "about"][0]{ bio, "resumeUrl": resumeFile.asset->url, profilePic },
-    "experience": *[_type == "experience"] | order(dates desc){ title, organization, dates, description, location },
-    "skills": *[_type == "skill"]{ name, icon },
-    "projects": *[_type == "project"] | order(_createdAt desc){ _id, title, description, technologies, mainImage, githubUrl, liveUrl }
+    "experience": *[_type == "experience"] | order(orderRank asc){ title, organization, dates, description, location },
+    "skills": *[_type == "skill"] | order(orderRank asc){ name, icon },
+    "projects": *[_type == "project"] | order(orderRank asc){ _id, title, description, technologies, mainImage, githubUrl, liveUrl }
   }`);
 
   // Extract data for each section
@@ -42,8 +42,8 @@ const Home = async () => {
             Hi, I'm Brandon Gill
           </span>
         </h1>
-        <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8">
-            Third Year Computer Science Student at the University of Oregon
+        <p className="text-lg md:text-xl text-gray-400 max-w-4xl mx-auto mb-8">
+            Third Year Undergraduate Computer Science Student at the Oregon State University
             Specializing in Artificial Intelligence
         </p>
         <a href={about?.resumeUrl} target="_blank" rel="noopener noreferrer" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:cursor-pointer">
@@ -52,7 +52,7 @@ const Home = async () => {
       </section>
 
       {/* <AboutSection aboutData={about} /> */}
-      {/* <ExperienceSection experienceData={experience} /> */}
+      <ExperienceSection experienceData={experience} />
       <SkillsSection skillsData={skills} />
       <ProjectSection projectsData={projects} />
 
