@@ -1,4 +1,5 @@
 import { PortableText } from '@portabletext/react';
+import type { PortableTextBlock } from '@portabletext/types';
 
 // Define your Experience type to match your Sanity schema
 type SanityExperience = {
@@ -7,7 +8,7 @@ type SanityExperience = {
   organization: string;
   location: string;
   dates: string;
-  description: any[]; // Sanity Portable Text
+  description: PortableTextBlock[];
 };
 
 const ExperienceSection = ({ experienceData }: { experienceData: SanityExperience[] }) => {

@@ -39,7 +39,7 @@ const Home = async () => {
         </div>
         <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-700">
-            Hi, I'm Brandon Gill
+            Hi, I&apos;m Brandon Gill
           </span>
         </h1>
         <p className="text-lg md:text-xl text-gray-400 max-w-4xl mx-auto mb-8">
@@ -58,7 +58,7 @@ const Home = async () => {
       <section className="text-center my-20 md:my-4">
         <h2 className="text-3xl font-semibold text-white mb-12">Get in Touch</h2>
         <p className="text-lg text-gray-400 mb-8 max-w-4xl mx-auto">
-          I'm currently seeking new opportunities and always open to discussing new projects or collaborations.
+          I&apos;m currently seeking new opportunities and always open to discussing new projects or collaborations.
         </p>
         <a href="mailto:brandongill9432@gmail.com" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
           Send me an Email

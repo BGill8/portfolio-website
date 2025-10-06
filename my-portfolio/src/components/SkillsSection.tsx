@@ -5,7 +5,11 @@ import { urlFor } from '@/lib/sanity';
 type SanitySkill = {
   _id: string;
   name: string;
-  icon: any; // This is a Sanity image object
+  icon: {
+    asset: {
+      _ref: string;
+    };
+  }
 };
 
 const SkillsSection = ({ skillsData }: { skillsData: SanitySkill[] }) => {
