@@ -58,6 +58,14 @@ export const experience = defineType({
       of: [{ type: 'block' }],
       description: 'A list of your responsibilities or achievements.',
     }),
+    defineField({
+      name: 'orderRank',
+      title: 'Order Rank',
+      type: 'number',
+      description: 'Use this to manually order items. Lower numbers appear first.',
+      validation: (Rule) => Rule.required().integer().positive(),
+      initialValue: 100,
+    }),
   ],
 });
 
@@ -80,6 +88,14 @@ export const skill = defineType({
       options: {
         hotspot: true, // enables cropping for images
       },
+    }),
+    defineField({
+      name: 'orderRank',
+      title: 'Order Rank',
+      type: 'number',
+      description: 'Use this to manually order skills. Lower numbers appear first.',
+      validation: (Rule) => Rule.required().integer().positive(),
+      initialValue: 100,
     }),
   ],
 });
@@ -124,6 +140,14 @@ export const project = defineType({
       name: 'liveUrl',
       title: 'Live Demo URL',
       type: 'url',
+    }),
+    defineField({
+      name: 'orderRank',
+      title: 'Order Rank',
+      type: 'number',
+      description: 'Use this to manually order projects. Lower numbers appear first.',
+      validation: (Rule) => Rule.required().integer().positive(),
+      initialValue: 100,
     }),
   ],
 });
