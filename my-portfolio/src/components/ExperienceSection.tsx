@@ -24,8 +24,7 @@ const ExperienceSection = ({ experienceData }: { experienceData: SanityExperienc
               </div>
               <span className="text-gray-500 text-sm">{exp.dates}</span>
             </div>
-            {/* You'll need a separate component to render Sanity's Portable Text */}
-            <div className="description">
+            <div className="prose prose-invert max-w-none text-gray-300">
               <PortableText value={exp.description} />
             </div>
           </div>
