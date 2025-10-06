@@ -14,7 +14,7 @@ export default function AboutPage() {
                 />
                 <section>
                     <p>
-                        Hi, I'm Brandon Gill. I'm a passionate developer with experience in building modern web applications.
+                        Hi, I&apos;m Brandon Gill. I&apos;m a passionate developer with experience in building modern web applications.
                         I enjoy learning new technologies and creating projects that make a difference.
                     </p>
                 </section>
