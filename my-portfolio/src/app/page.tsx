@@ -38,7 +38,7 @@ const Home = async () => {
           </div> */}
         </div>
         <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-450 to-blue-700">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-700">
             Hi, I'm Brandon Gill
           </span>
         </h1>
