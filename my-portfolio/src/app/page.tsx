@@ -13,7 +13,10 @@ const Home = async () => {
     "experience": *[_type == "experience"] | order(orderRank asc){ title, organization, dates, description, location },
     "skills": *[_type == "skill"] | order(orderRank asc){ name, icon },
     "projects": *[_type == "project"] | order(orderRank asc){ _id, title, description, technologies, mainImage, githubUrl, liveUrl }
-  }`);
+  }`,
+  {}, //params object ; leave blank
+  { next: { tags: ['sanity'] } } // Add the revalidation tag here
+);
 
   // Extract data for each section
   const { about, experience, skills, projects } = data;
