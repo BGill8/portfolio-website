@@ -51,7 +51,6 @@ const Home = async () => {
         </a>
       </section>
 
-      {/* <AboutSection aboutData={about} /> */}
       <ExperienceSection experienceData={experience} />
       <SkillsSection skillsData={skills} />
       <ProjectSection projectsData={projects} />

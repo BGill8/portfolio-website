@@ -1,9 +1,6 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { BsGithub, BsGlobe } from 'react-icons/bs';
-import { client, urlFor } from '@/lib/sanity';
+import { urlFor } from '@/lib/sanity';
 
 // Define the type to match your Sanity schema
 type SanityProject = {
@@ -20,48 +17,13 @@ type SanityProject = {
   liveUrl?: string;
 };
 
-// Define a separate function to fetch the data
-async function fetchProjects() {
-  const projects = await client.fetch(`*[_type == "project"]{
-    _id,
-    title,
-    description,
-    technologies,
-    mainImage,
-    githubUrl,
-    liveUrl
-  }`);
-  return projects;
-}
-
-const ProjectsSection = () => {
-  const [projects, setProjects] = useState<SanityProject[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function getProjects() {
-      const fetchedProjects: SanityProject[] = await fetchProjects();
-      setProjects(fetchedProjects);
-      setLoading(false);
-    }
-    getProjects();
-  }, []);
-
-  if (loading) {
-    return (
-      <section className="my-20 md:my-32 text-center">
-        <h2 className="text-3xl font-bold text-white mb-12">Selected Work</h2>
-        <p className="text-gray-400">Loading projects...</p>
-      </section>
-    );
-  }
-
+const ProjectsSection = ({ projectsData }: { projectsData: SanityProject[] }) => {
   return (
     <section className="my-20 md:my-32">
       <h2 className="text-3xl font-bold text-white mb-12 text-center">Selected Work</h2>
       <div className="space-y-16">
-        {projects.length > 0 ? (
-          projects.map((project) => (
+        {projectsData.length > 0 ? (
+          projectsData.map((project) => (
             <div key={project._id} className="bg-gray-800 rounded-lg shadow-xl border border-gray-700 p-8 transform transition duration-300 hover:scale-[1.01] hover:shadow-2xl">
               <h3 className="text-3xl font-bold text-white mb-4">{project.title}</h3>
               <p className="text-gray-400 text-sm mb-6">
