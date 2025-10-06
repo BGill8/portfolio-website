@@ -1,66 +1,29 @@
-'use client';
+import Image from 'next/image';
+import { urlFor } from '@/lib/sanity';
 
-import { useEffect, useState } from 'react';
-import { client } from '@/lib/sanity';
-import { PortableText } from '@portabletext/react';
-
-// Define your Experience type to match your Sanity schema
-type SanityExperience = {
+// Define your Skill type
+type SanitySkill = {
   _id: string;
-  title: string;
-  organization: string;
-  location: string;
-  dates: string;
-  description: any[]; // Sanity Portable Text
+  name: string;
+  icon: any; // This is a Sanity image object
 };
 
-async function fetchExperience() {
-  // Get all documents of type 'experience', sorted by date
-  const experience = await client.fetch(`*[_type == "experience"] | order(dates desc){
-    _id,
-    title,
-    organization,
-    location,
-    dates,
-    description
-  }`);
-  return experience;
-}
-
-const ExperienceSection = () => {
-  const [experienceData, setExperienceData] = useState<SanityExperience[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function getExperience() {
-      const fetchedExperience: SanityExperience[] = await fetchExperience();
-      setExperienceData(fetchedExperience);
-      setLoading(false);
-    }
-    getExperience();
-  }, []);
-
-  if (loading) {
-    return <p className="text-center text-gray-400">Loading experience...</p>;
-  }
-
+const SkillsSection = ({ skillsData }: { skillsData: SanitySkill[] }) => {
   return (
     <section className="my-20 md:my-32">
-      <h2 className="text-3xl font-bold text-white mb-12 text-center">Experience</h2>
-      <div className="space-y-8 max-w-3xl mx-auto">
-        {experienceData.map((exp) => (
-          <div key={exp._id} className="bg-gray-800 rounded-lg p-6 shadow-xl border border-gray-700">
-            <div className="flex justify-between items-start mb-2">
-              <div>
-                <h3 className="text-2xl font-semibold text-white">{exp.title}</h3>
-                <p className="text-lg text-gray-400">{exp.organization}, {exp.location}</p>
-              </div>
-              <span className="text-gray-500 text-sm">{exp.dates}</span>
+      <h2 className="text-3xl font-bold text-white mb-12 text-center">Skills</h2>
+      <div className="flex flex-wrap justify-center items-center gap-8 max-w-4xl mx-auto">
+        {skillsData.map((skill) => (
+          <div key={skill._id} className="flex flex-col items-center gap-2">
+            <div className="w-20 h-20 p-4 bg-gray-800 rounded-full flex items-center justify-center border border-gray-700">
+              <Image
+                src={urlFor(skill.icon).url()}
+                alt={`${skill.name} icon`}
+                width={48}
+                height={48}
+              />
             </div>
-            {/* You'll need a separate component to render Sanity's Portable Text */}
-            <div className="description">
-              <PortableText value={exp.description} />
-            </div>
+            <p className="text-gray-300">{skill.name}</p>
           </div>
         ))}
       </div>
@@ -68,4 +31,4 @@ const ExperienceSection = () => {
   );
 };
 
-export default ExperienceSection;
+export default SkillsSection;
