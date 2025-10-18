@@ -9,6 +9,7 @@ const Navbar = () => {
   //    Make sure these images are in your `/public` directory.
   const profileImages = [
     '/headshot.jpeg',
+    '/red.JPG',
     '/stone.jpeg',
     '/mask.JPG',
     '/forehand.jpeg'
