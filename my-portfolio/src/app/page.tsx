@@ -1,9 +1,6 @@
 import { client } from '@/lib/sanity';
-import { urlFor } from '@/lib/sanity';
-import Image from 'next/image';
 import ProjectSection from '@/components/ProjectSection';
 import SkillsSection from '@/components/SkillsSection';
-import AboutSection from '@/components/AboutSection';
 import ExperienceSection from '@/components/ExperienceSection';
 
 const Home = async () => {
@@ -20,9 +17,6 @@ const Home = async () => {
 
   // Extract data for each section
   const { about, experience, skills, projects } = data;
-
-  // Words for the hero section
-  const words = ["purposeful", "impactful", "engaging", "innovative"];
 
   return (
     <div className="max-w-6xl mx-auto px-4 md:px-0">
