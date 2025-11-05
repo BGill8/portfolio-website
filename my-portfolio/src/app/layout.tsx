@@ -8,7 +8,7 @@ import CustomCursor from '@/components/CustomCursor';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'My Professional Portfolio',
+  title: 'Brandon Gill',
   description: 'A portfolio of my web development projects and skills.',
 };
 
@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className="dark">
+      <body className={`${inter.className} bg-gray-950 text-gray-300`}>
         <CustomCursor />
         <Navbar />
         <Layout>{children}</Layout>
