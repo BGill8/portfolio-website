@@ -39,7 +39,7 @@ const Home = async () => {
             Hi, I&apos;m Brandon Gill
           </span>
         </h1>
-        <p className="text-lg md:text-xl text-gray-400 max-w-4xl mx-auto mb-8">
+        <p className="text-lg md:text-xl text-white max-w-4xl mx-auto mb-8">
             Third Year Undergraduate Computer Science Student at the Oregon State University
             Specializing in Artificial Intelligence
         </p>
