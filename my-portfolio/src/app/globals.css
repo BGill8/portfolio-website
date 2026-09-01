@@ -1,67 +1,98 @@
 @import "tailwindcss";
 
-:root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@keyframes flip-in {
-  from {
-    transform: rotateY(90deg);
-    opacity: 0;
+@layer base {
+  :root {
+    --background: #09090b;
+    --foreground: #fafafa;
+    --card: #121216;
+    --card-foreground: #fafafa;
+    --border: #27272a;
+    --primary: #3b82f6;
+    --primary-foreground: #ffffff;
+    --muted: #18181b;
+    --muted-foreground: #a1a1aa;
+    --accent: #27272a;
+    --accent-foreground: #fafafa;
   }
-  to {
-    transform: rotateY(0deg);
-    opacity: 1;
+
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    min-height: 100vh;
   }
 }
 
-.animate-flip-in {
-  animation: flip-in 0.5s ease-out;
+/* Custom card and surface styles */
+.glass-panel {
+  background: rgba(18, 18, 22, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-
-
-/* Base styles for the custom cursor element */
-.custom-cursor {
-  position: fixed;
-  top: -8px; /* Offset to center the cursor */
-  left: -8px;
-  width: 16px;
-  height: 16px;
-  border: .1px solid #3b82f6; /* Blue-500 */
-  background-color: rgba(59, 130, 246, 0.9);;
-  
-  /* The magic for the hexagon shape */
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-
-  /* This is CRITICAL: it allows clicks to "pass through" the cursor div */
-  pointer-events: none;
-  
-  /* Smooth transitions for all properties */
-  transition: transform 0.2s ease-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, width 0.2s ease-in-out, height 0.2s ease-in-out;
-  z-index: 9999;
+.glass-panel:hover {
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Styles for when the cursor is in "pointer" mode (hovering) */
-.custom-cursor.pointer {
-  top: -8px; /* Adjust offset for the larger size */
-  left: -8px;
-  width: 16px;
-  height: 16px;
-  background-color: rgba(59, 130, 246, 0.9); /* Semi-transparent blue */
-  border-color: transparent;
+.glass-panel-glow {
+  position: relative;
+  background: rgba(18, 18, 22, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-glow:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Subtle gradient text */
+.text-gradient-subtle {
+  background: linear-gradient(135deg, #ffffff 30%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-accent {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-brand {
+  background: linear-gradient(135deg, #60a5fa 0%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom scrollbar for modern browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
 }

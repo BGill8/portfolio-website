@@ -6,7 +6,19 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
         port: '',
-        pathname: '/**', // This allows any image from this hostname
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.credly.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.credly.com',
+        port: '',
+        pathname: '/**',
       },
     ],
   },
