@@ -152,4 +152,74 @@ export const project = defineType({
   ],
 });
 
-export const schemaTypes = [about, experience, skill, project];
+export const certification = defineType({
+  name: 'certification',
+  title: 'Certifications & Badges',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      description: 'e.g., AWS Certified Machine Learning Engineer – Associate',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'issuer',
+      title: 'Issuing Organization',
+      type: 'string',
+      description: 'e.g., Amazon Web Services, Google Cloud',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'issueDate',
+      title: 'Issue Date',
+      type: 'string',
+      description: 'e.g., April 2026 or 2026-04-13',
+    }),
+    defineField({
+      name: 'expiryDate',
+      title: 'Expiry Date',
+      type: 'string',
+      description: 'e.g., April 2029 or No Expiration',
+    }),
+    defineField({
+      name: 'credlyUrl',
+      title: 'Credly / Verification URL',
+      type: 'url',
+      description: 'Link to verified badge on Credly or certification page',
+    }),
+    defineField({
+      name: 'badgeImage',
+      title: 'Badge Image / Logo',
+      type: 'image',
+      description: 'The PNG or SVG badge logo image from Credly',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      description: 'A summary of skills and requirements demonstrated by this credential.',
+    }),
+    defineField({
+      name: 'skills',
+      title: 'Skills',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Associated competencies (e.g. Machine Learning, Cloud Computing, Generative AI).',
+    }),
+    defineField({
+      name: 'orderRank',
+      title: 'Order Rank',
+      type: 'number',
+      description: 'Use this to manually order certifications. Lower numbers appear first.',
+      validation: (Rule) => Rule.required().integer().positive(),
+      initialValue: 100,
+    }),
+  ],
+});
+
+export const schemaTypes = [about, experience, skill, project, certification];

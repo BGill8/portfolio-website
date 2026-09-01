@@ -1,17 +1,12 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  // This is the line that fixes your dark mode issue
-  darkMode: 'class', 
-  
-  // These paths tell Tailwind where to look for your class names
+  darkMode: 'class',
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src'// If you're using the App Router
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  
-  // This is where you can customize your theme (colors, fonts, etc.)
   theme: {
     extend: {
       backgroundImage: {
@@ -21,11 +16,7 @@ const config: Config = {
       },
     },
   },
-  
-  // This is where you add plugins, like the typography plugin
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
-}
+  plugins: [],
+};
 
-export default config
+export default config;

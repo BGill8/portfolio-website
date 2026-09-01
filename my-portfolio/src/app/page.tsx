@@ -1,73 +1,119 @@
 import { client } from '@/lib/sanity';
+import HeroSection from '@/components/HeroSection';
+import CertificationsSection from '@/components/CertificationsSection';
+import ExperienceSection from '@/components/ExperienceSection';
 import ProjectSection from '@/components/ProjectSection';
 import SkillsSection from '@/components/SkillsSection';
-import ExperienceSection from '@/components/ExperienceSection';
+import ContactSection from '@/components/ContactSection';
+import {
+  DEFAULT_ABOUT,
+  DEFAULT_CERTIFICATIONS,
+  DEFAULT_EXPERIENCES,
+  DEFAULT_PROJECTS,
+} from '@/lib/constants';
+import {
+  SanityCertification,
+  SanityExperience,
+  SanityProject,
+  SanitySkill,
+} from '@/lib/types';
 
-const Home = async () => {
-  // Fetch all data in one go
-  const data = await client.fetch(`{
-    "about": *[_type == "about"][0]{ bio, "resumeUrl": resumeFile.asset->url, profilePic },
-    "experience": *[_type == "experience"] | order(orderRank asc){ title, organization, dates, description, location },
-    "skills": *[_type == "skill"] | order(orderRank asc){ name, icon },
-    "projects": *[_type == "project"] | order(orderRank asc){ _id, title, description, technologies, mainImage, githubUrl, liveUrl }
-  }`,
-  {}, //params object ; leave blank
-  { next: { tags: ['sanity'] } } // Add the revalidation tag here
-);
+export const revalidate = 60; // Revalidate every minute
 
-  // Extract data for each section
-  const { about, experience, skills, projects } = data;
+async function getPortfolioData() {
+  try {
+    const data = await client.fetch(
+      `{
+        "about": *[_type == "about"][0]{
+          bio,
+          headline,
+          subheadline,
+          "resumeUrl": resumeFile.asset->url,
+          profilePic
+        },
+        "certifications": *[_type == "certification"] | order(orderRank asc){
+          _id,
+          title,
+          issuer,
+          issueDate,
+          expiryDate,
+          credlyUrl,
+          badgeImage,
+          description,
+          skills,
+          orderRank
+        },
+        "experience": *[_type == "experience"] | order(orderRank asc){
+          _id,
+          title,
+          organization,
+          dates,
+          description,
+          location,
+          skills,
+          orderRank
+        },
+        "skills": *[_type == "skill"] | order(orderRank asc){
+          _id,
+          name,
+          category,
+          icon,
+          orderRank
+        },
+        "projects": *[_type == "project"] | order(orderRank asc){
+          _id,
+          title,
+          description,
+          technologies,
+          mainImage,
+          githubUrl,
+          liveUrl,
+          orderRank
+        }
+      }`,
+      {},
+      { next: { tags: ['sanity'] } }
+    );
+
+    return {
+      about: data?.about || DEFAULT_ABOUT,
+      certifications:
+        data?.certifications && data.certifications.length > 0
+          ? (data.certifications as SanityCertification[])
+          : DEFAULT_CERTIFICATIONS,
+      experience:
+        data?.experience && data.experience.length > 0
+          ? (data.experience as SanityExperience[])
+          : DEFAULT_EXPERIENCES,
+      skills: (data?.skills as SanitySkill[]) || [],
+      projects:
+        data?.projects && data.projects.length > 0
+          ? (data.projects as SanityProject[])
+          : DEFAULT_PROJECTS,
+    };
+  } catch (error) {
+    console.warn('Sanity fetch fallback active:', error instanceof Error ? error.message : error);
+    return {
+      about: DEFAULT_ABOUT,
+      certifications: DEFAULT_CERTIFICATIONS,
+      experience: DEFAULT_EXPERIENCES,
+      skills: [],
+      projects: DEFAULT_PROJECTS,
+    };
+  }
+}
+
+export default async function Home() {
+  const { about, certifications, experience, skills, projects } = await getPortfolioData();
 
   return (
-    <div className="max-w-6xl mx-auto px-4 md:px-0">
-      <section className="text-center my-20 md:my-32">
-        <div className="mb-4">
-          {/* <div className="w-24 h-24 mx-auto bg-gray-600 rounded-full flex items-center justify-center text-gray-300 text-sm">
-            {about?.profilePic && (
-              <Image 
-                src={urlFor(about.profilePic).url()}
-                alt="Profile picture" 
-                width={96} 
-                height={96}
-                className="rounded-full"
-              />
-            )}
-          </div> */}
-        </div>
-        <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-700">
-            Hi, I&apos;m Brandon Gill
-          </span>
-        </h1>
-        <p className="text-lg md:text-xl text-white max-w-4xl mx-auto mb-8">
-            Third Year Undergraduate Computer Science Student at the Oregon State University
-            Specializing in Artificial Intelligence
-        </p>
-        <a href={about?.resumeUrl} target="_blank" rel="noopener noreferrer" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:cursor-pointer">
-          View Resume
-        </a>
-      </section>
-
+    <div className="space-y-4">
+      <HeroSection resumeUrl={about?.resumeUrl} />
+      <CertificationsSection certificationsData={certifications} />
       <ExperienceSection experienceData={experience} />
-      <SkillsSection skillsData={skills} />
       <ProjectSection projectsData={projects} />
-
-      <section className="text-center my-20 md:my-4">
-        <h2 className="text-3xl font-semibold text-white mb-12">Get in Touch</h2>
-        <p className="text-lg text-gray-400 mb-8 max-w-4xl mx-auto">
-          I&apos;m currently seeking new opportunities and always open to discussing new projects or collaborations.
-        </p>
-        <a href="mailto:brandongill9432@gmail.com" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
-          Send me an Email
-        </a>
-        <div className="flex justify-center space-x-6 mt-8">
-          <a href="https://linkedin.com/in/brandonkngill" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-blue-500 transition-colors">LinkedIn</a>
-          <a href="https://github.com/BGill8" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-blue-500 transition-colors">GitHub</a>
-          <a href="https://instagram.com/brandonkngill" target="_blank" rel="noopener noreferrer" className="text-xl text-gray-400 hover:text-blue-500 transition-colors">Instagram</a>
-        </div>
-      </section>
+      <SkillsSection skillsData={skills} />
+      <ContactSection />
     </div>
   );
-};
-
-export default Home;
+}
