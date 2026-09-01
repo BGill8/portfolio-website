@@ -143,4 +143,13 @@ export const DEFAULT_PROJECTS: SanityProject[] = [
     githubUrl: 'https://github.com/BGill8',
     orderRank: 30,
   },
+  {
+    _id: 'proj-dcf-engine',
+    title: 'Bull/Base/Bear DCF Valuation Engine',
+    description: 'Interactive 5-year Discounted Cash Flow financial valuation calculator with Yahoo Finance data ingestion, multi-scenario sensitivity modeling, and intrinsic share price estimation.',
+    technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Financial Modeling', 'yfinance'],
+    githubUrl: 'https://github.com/BGill8',
+    liveUrl: '/finance/dcf',
+    orderRank: 40,
+  },
 ];

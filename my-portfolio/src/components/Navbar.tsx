@@ -29,12 +29,13 @@ const Navbar = ({ resumeUrl = '/resume.pdf' }: NavbarProps) => {
   };
 
   const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Certifications', href: '#certifications' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'About', href: '/#about' },
+    { label: 'Certifications', href: '/#certifications' },
+    { label: 'Experience', href: '/#experience' },
+    { label: 'Projects', href: '/#projects' },
+    { label: 'DCF Model', href: '/finance/dcf' },
+    { label: 'Skills', href: '/#skills' },
+    { label: 'Contact', href: '/#contact' },
   ];
 
   return (
