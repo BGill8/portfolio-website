@@ -1,7 +1,5 @@
-import Image from 'next/image';
 import { BsGithub } from 'react-icons/bs';
-import { Code2, ExternalLink, FolderGit2 } from 'lucide-react';
-import { urlFor } from '@/lib/sanity';
+import { ArrowUpRight } from 'lucide-react';
 import { SanityProject } from '@/lib/types';
 import { DEFAULT_PROJECTS } from '@/lib/constants';
 
@@ -15,112 +13,88 @@ const ProjectSection = ({ projectsData }: ProjectSectionProps) => {
     : DEFAULT_PROJECTS;
 
   return (
-    <section className="py-16 md:py-24 border-b border-zinc-800/60" id="projects">
-      <div className="space-y-2 mb-12">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-blue-400 bg-blue-500/10 border border-blue-500/20">
-          <FolderGit2 className="w-3.5 h-3.5" />
-          <span>Featured Portfolio</span>
+    <section className="py-14 md:py-20 border-b border-[#2e2c2c]" id="projects">
+      <div className="space-y-2 mb-10">
+        <div className="inline-flex items-center gap-2 text-xs font-mono text-[#8e8b8b]">
+          <span className="text-white">[*]</span>
+          <span>SYSTEMS // OPEN_SOURCE_REPOSITORIES</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">
           Selected Projects
         </h2>
-        <p className="text-zinc-400 text-sm sm:text-base max-w-xl">
-          Autonomous AI agents, machine learning pipelines, and cloud-native systems.
+        <p className="text-[#8e8b8b] text-xs sm:text-sm max-w-xl font-sans">
+          Autonomous AI agents, machine learning pipelines, and cloud-native software architectures.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {projects.map((project, index) => {
-          let imageSrc: string | null = null;
-          if (project.mainImage && project.mainImage.asset) {
-            try {
-              imageSrc = urlFor(project.mainImage).url();
-            } catch {
-              imageSrc = null;
-            }
-          } else if (project.imageUrl) {
-            imageSrc = project.imageUrl;
-          }
-
           return (
             <div
               key={project._id || `${project.title}-${index}`}
-              className="glass-panel-glow rounded-2xl overflow-hidden flex flex-col justify-between border border-zinc-800 group"
+              className="border border-[#2e2c2c] bg-[#171616] hover:bg-[#1c1b1b] hover:border-[#3b3939] rounded-[4px] p-5 flex flex-col justify-between transition-colors"
             >
               <div>
-                {/* Project Image / Visual Preview */}
-                {imageSrc ? (
-                  <div className="relative w-full h-48 bg-zinc-900 overflow-hidden border-b border-zinc-800">
-                    <Image
-                      src={imageSrc}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                ) : (
-                  <div className="h-32 bg-gradient-to-br from-zinc-900 via-zinc-900/80 to-indigo-950/30 p-5 flex items-center justify-between border-b border-zinc-800/80">
-                    <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-                      <Code2 className="w-5 h-5" />
-                    </div>
-                    <span className="text-[11px] font-mono text-zinc-500">Project #{index + 1}</span>
-                  </div>
-                )}
-
-                {/* Project Content */}
-                <div className="p-6">
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">
-                    {project.title}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-4 line-clamp-3">
-                    {project.description}
-                  </p>
-
-                  {/* Technologies Tags */}
-                  {project.technologies && project.technologies.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mb-2">
-                      {project.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="text-[11px] font-medium text-zinc-300 bg-zinc-800/80 border border-zinc-700/50 px-2 py-0.5 rounded-md"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                {/* Card Top Metadata */}
+                <div className="flex items-center justify-between font-mono text-xs text-[#8e8b8b] mb-3 pb-2 border-b border-[#2e2c2c]">
+                  <span>[PROJ_{String(index + 1).padStart(2, '0')}]</span>
+                  {project.liveUrl && (
+                    <span className="text-[#03B000] text-[10px] bg-[#03B000]/10 border border-[#03B000]/30 px-1.5 py-0.5 rounded-[2px]">
+                      LIVE
+                    </span>
                   )}
                 </div>
+
+                <h3 className="text-base sm:text-lg font-bold text-white font-sans mb-2">
+                  {project.title}
+                </h3>
+
+                <p className="text-xs sm:text-sm text-[#8e8b8b] font-sans leading-relaxed mb-4">
+                  {project.description}
+                </p>
+
+                {/* Technologies */}
+                {project.technologies && project.technologies.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-[11px] font-mono text-[#cfcecd] bg-[#131111] border border-[#2e2c2c] px-2 py-0.5 rounded-[2px]"
+                      >
+                        [{tech}]
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Action Links */}
-              <div className="p-6 pt-0 mt-auto">
-                <div className="pt-4 border-t border-zinc-800/60 flex items-center gap-3">
+              <div className="pt-3 border-t border-[#2e2c2c] flex items-center justify-between font-mono text-xs">
+                <div className="flex items-center space-x-4">
                   {project.githubUrl && (
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-300 hover:text-white bg-zinc-800/80 hover:bg-zinc-700/80 px-3 py-1.5 rounded-lg border border-zinc-700/60 transition-colors"
+                      className="inline-flex items-center gap-1.5 text-[#cfcecd] hover:text-white transition-colors"
                     >
                       <BsGithub className="w-3.5 h-3.5" />
-                      <span>Source</span>
+                      <span>source</span>
                     </a>
                   )}
 
                   {project.liveUrl && (
                     <a
                       href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 px-3 py-1.5 rounded-lg shadow-sm shadow-indigo-600/20 transition-colors"
+                      className="inline-flex items-center gap-1 text-[#03B000] hover:text-emerald-300 transition-colors"
                     >
-                      <span>Live Demo</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>launch app</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
                     </a>
                   )}
                 </div>
+
+                <span className="text-[10px] text-[#656363]">v2.0</span>
               </div>
             </div>
           );

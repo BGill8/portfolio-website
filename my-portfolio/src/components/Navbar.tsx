@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { BsGithub, BsLinkedin } from 'react-icons/bs';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { Award, FileText } from 'lucide-react';
 import { CREDLY_PROFILE_URL, GITHUB_URL, LINKEDIN_URL } from '@/lib/constants';
@@ -29,91 +28,76 @@ const Navbar = ({ resumeUrl = '/resume.pdf' }: NavbarProps) => {
   };
 
   const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Certifications', href: '#certifications' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'About', href: '/#about' },
+    { label: 'Certifications', href: '/#certifications', badge: '3' },
+    { label: 'Experience', href: '/#experience' },
+    { label: 'Projects', href: '/#projects' },
+    { label: 'DCF Model', href: '/finance/dcf' },
+    { label: 'Skills', href: '/#skills' },
+    { label: 'Contact', href: '/#contact' },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Brand & Interactive Avatar */}
+    <header className="sticky top-0 z-50 w-full border-b border-[#2e2c2c] bg-[#131111]/95 backdrop-blur-sm">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        {/* Brand & Avatar */}
         <div className="flex items-center space-x-3">
           <button
             onClick={handleImageClick}
-            className="group relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-indigo-500/30 hover:ring-indigo-500 transition-all duration-300 focus:outline-none focus:ring-offset-2 focus:ring-offset-zinc-950"
+            className="group relative w-8 h-8 rounded-[3px] overflow-hidden border border-[#3b3939] hover:border-[#8e8b8b] transition-colors focus:outline-none"
             title="Click to toggle profile picture"
             aria-label="Toggle profile picture"
           >
             <Image
               key={imageIndex}
               src={profileImages[imageIndex]}
-              alt="Brandon Gill profile"
-              width={40}
-              height={40}
-              className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+              alt="Brandon Gill"
+              width={32}
+              height={32}
+              className="object-cover w-full h-full"
               priority
             />
           </button>
-          <div className="flex flex-col">
+          <div className="flex items-baseline space-x-2 font-mono">
             <Link
               href="/"
-              className="text-base font-semibold tracking-tight text-zinc-100 hover:text-white transition-colors"
+              className="text-xs font-bold tracking-wider text-white hover:text-zinc-300 transition-colors uppercase"
             >
               Brandon Gill
             </Link>
-            <span className="text-xs text-zinc-400 font-medium">
-              M.S. AI @ Oregon State
+            <span className="hidden sm:inline text-[11px] text-[#8e8b8b]">
+              [M.S. AI @ OSU]
             </span>
           </div>
         </div>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
+        <nav className="hidden md:flex items-center space-x-1 lg:space-x-1.5 font-mono text-xs">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="px-3 py-1.5 text-sm font-medium text-zinc-300 hover:text-white hover:bg-zinc-800/60 rounded-lg transition-colors"
+              className="px-2.5 py-1 text-[#8e8b8b] hover:text-white hover:bg-[#1f1d1d] rounded-[3px] transition-colors"
             >
               {link.label}
+              {link.badge && (
+                <span className="ml-1 text-[10px] text-[#656363]">[{link.badge}]</span>
+              )}
             </Link>
           ))}
         </nav>
 
-        {/* Action Buttons & Socials */}
-        <div className="hidden sm:flex items-center space-x-3">
+        {/* Desktop Action Buttons */}
+        <div className="hidden sm:flex items-center space-x-2 font-mono text-xs">
           <a
             href={CREDLY_PROFILE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-1.5 text-xs font-semibold text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 px-3 py-1.5 rounded-full transition-all"
+            className="inline-flex items-center gap-1.5 text-[11px] text-[#cfcecd] hover:text-white bg-[#1a1919] hover:bg-[#242222] border border-[#3b3939] px-2.5 py-1 rounded-[3px] transition-colors"
             title="View Credly Badges"
           >
-            <Award className="w-3.5 h-3.5 text-amber-400" />
-            <span>Credly Badges</span>
-          </a>
-
-          <a
-            href={GITHUB_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-zinc-100 p-2 rounded-lg hover:bg-zinc-800/60 transition-colors"
-            aria-label="GitHub Profile"
-          >
-            <BsGithub className="w-4 h-4" />
-          </a>
-          <a
-            href={LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-zinc-100 p-2 rounded-lg hover:bg-zinc-800/60 transition-colors"
-            aria-label="LinkedIn Profile"
-          >
-            <BsLinkedin className="w-4 h-4" />
+            <Award className="w-3 h-3 text-[#cfcecd]" />
+            <span>Badges [3]</span>
           </a>
 
           {resumeUrl && (
@@ -121,69 +105,58 @@ const Navbar = ({ resumeUrl = '/resume.pdf' }: NavbarProps) => {
               href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-500 px-3.5 py-1.5 rounded-lg shadow-sm shadow-indigo-500/20 transition-colors"
+              className="inline-flex items-center gap-1 text-[11px] text-[#8e8b8b] hover:text-white px-2 py-1 transition-colors"
+              title="Download Resume"
             >
-              <FileText className="w-3.5 h-3.5" />
+              <FileText className="w-3 h-3" />
               <span>Resume</span>
             </a>
           )}
         </div>
 
-        {/* Mobile Hamburger Button */}
-        <div className="flex sm:hidden items-center space-x-2">
+        {/* Mobile menu toggle */}
+        <div className="flex md:hidden items-center space-x-2">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/60 transition-colors"
-            aria-label="Toggle navigation menu"
+            className="p-1.5 text-[#8e8b8b] hover:text-white border border-[#3b3939] rounded-[3px] transition-colors focus:outline-none"
+            aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <HiX className="w-6 h-6" /> : <HiMenu className="w-6 h-6" />}
+            {mobileMenuOpen ? <HiX className="w-5 h-5" /> : <HiMenu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="sm:hidden border-b border-zinc-800 bg-zinc-950 px-4 pt-2 pb-5 space-y-2 animate-in slide-in-from-top duration-200">
+        <div className="md:hidden border-b border-[#2e2c2c] bg-[#171616] px-4 py-3 space-y-2 font-mono text-xs">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 text-sm font-medium text-zinc-300 hover:text-white hover:bg-zinc-800/60 rounded-lg transition-colors"
+              className="block px-3 py-1.5 text-[#cfcecd] hover:text-white hover:bg-[#1f1d1d] rounded-[3px] transition-colors"
             >
-              {link.label}
+              <span>{link.label}</span>
+              {link.badge && <span className="ml-1 text-[#8e8b8b]">[{link.badge}]</span>}
             </Link>
           ))}
-          <div className="pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+          <div className="pt-2 border-t border-[#2e2c2c] flex items-center space-x-3 text-xs">
             <a
               href={CREDLY_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-1.5 text-xs font-medium text-amber-300 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-full"
+              className="text-[#cfcecd] hover:text-white"
             >
-              <Award className="w-3.5 h-3.5 text-amber-400" />
-              <span>Credly Badges</span>
+              Credly [3 Badges]
             </a>
-            <div className="flex items-center space-x-3">
-              <a
-                href={GITHUB_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-400 hover:text-white p-1"
-                aria-label="GitHub Profile"
-              >
-                <BsGithub className="w-4 h-4" />
-              </a>
-              <a
-                href={LINKEDIN_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-400 hover:text-white p-1"
-                aria-label="LinkedIn Profile"
-              >
-                <BsLinkedin className="w-4 h-4" />
-              </a>
-            </div>
+            <span className="text-[#3b3939]">|</span>
+            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-[#8e8b8b] hover:text-white">
+              GitHub
+            </a>
+            <span className="text-[#3b3939]">|</span>
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="text-[#8e8b8b] hover:text-white">
+              LinkedIn
+            </a>
           </div>
         </div>
       )}

@@ -8,9 +8,7 @@ import {
   Calculator,
   ChevronDown,
   ChevronUp,
-  HelpCircle,
   Info,
-  Layers,
   Lock,
   RefreshCw,
   Search,
@@ -131,69 +129,69 @@ export default function EPSValuationCalculatorPage() {
   );
 
   return (
-    <div className="py-6 sm:py-10 space-y-8 max-w-6xl mx-auto">
+    <div className="py-6 sm:py-10 space-y-6 max-w-5xl mx-auto font-sans">
       {/* Top Header & Breadcrumb */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-zinc-800/80">
-        <div className="space-y-1.5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#2e2c2c]">
+        <div className="space-y-1.5 font-mono">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-400 hover:text-white transition-colors mb-2"
+            className="inline-flex items-center gap-1.5 text-xs text-[#8e8b8b] hover:text-white transition-colors mb-1"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Back to Portfolio</span>
+            <span>&lt;- Back to Portfolio</span>
           </Link>
           <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-              <Calculator className="w-5 h-5" />
+            <span className="p-1 rounded-[3px] bg-[#1f1d1d] text-[#cfcecd] border border-[#3b3939]">
+              <Calculator className="w-4 h-4" />
             </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-              5-Year EPS & Revenue Valuation Calculator
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-sans">
+              5-Year EPS &amp; Revenue Valuation Model
             </h1>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-400 max-w-2xl">
-            Intuitive 5-year valuation model projecting Revenue, Net Margins, and EPS into Year 5 target prices with interlocked floor &amp; ceiling scenario controls.
+          <p className="text-xs text-[#8e8b8b] max-w-2xl font-sans">
+            Intuitive 5-year valuation engine projecting Revenue, Net Margins, and EPS into Year 5 target prices with interlocked floor &amp; ceiling scenario controls.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-center">
+        <div className="flex items-center gap-2 self-start sm:self-center font-mono text-xs">
           <button
             onClick={handleResetDefaults}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:text-white bg-zinc-900 hover:bg-zinc-800 rounded-lg border border-zinc-800 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[#cfcecd] hover:text-white bg-[#1a1919] hover:bg-[#222020] rounded-[3px] border border-[#3b3939] transition-colors cursor-pointer"
             title="Reset to recommended ticker scenario presets"
           >
-            <RefreshCw className="w-3.5 h-3.5 text-zinc-400" />
+            <RefreshCw className="w-3 h-3 text-[#8e8b8b]" />
             <span>Reset Presets</span>
           </button>
         </div>
       </div>
 
       {/* Ticker Search & Quick-Select Bar */}
-      <div className="glass-panel rounded-2xl p-5 border border-zinc-800/80 space-y-4">
-        <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row items-center gap-3">
+      <div className="border border-[#2e2c2c] bg-[#171616] rounded-[4px] p-4 space-y-3 font-mono">
+        <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row items-center gap-2.5">
           <div className="relative flex-1 w-full">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#8e8b8b]" />
             <input
               type="text"
               value={tickerInput}
               onChange={(e) => setTickerInput(e.target.value.toUpperCase())}
-              placeholder="Search ANY stock ticker (e.g. AAPL, QCOM, AMZN, VST, OKTA, PLTR)..."
-              className="w-full bg-zinc-900/90 text-white placeholder-zinc-500 text-sm font-semibold pl-10 pr-4 py-2.5 rounded-xl border border-zinc-700/60 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              placeholder="Search ticker (e.g. AAPL, QCOM, AMZN, VST, OKTA, PLTR)..."
+              className="w-full bg-[#131111] text-white placeholder-[#656363] text-xs font-mono font-semibold pl-9 pr-3 py-2 rounded-[3px] border border-[#2e2c2c] focus:outline-none focus:border-[#8e8b8b] transition-colors"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 transition-colors shadow-sm shadow-indigo-600/20 cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-[3px] text-xs font-mono font-semibold text-[#131111] bg-white hover:bg-[#e4e2e2] disabled:opacity-50 transition-colors cursor-pointer"
           >
             {loading ? (
               <>
-                <RefreshCw className="w-4 h-4 animate-spin" />
-                <span>Fetching Live Data...</span>
+                <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                <span>Ingesting...</span>
               </>
             ) : (
               <>
-                <Zap className="w-4 h-4" />
+                <Zap className="w-3.5 h-3.5" />
                 <span>Fetch Ticker</span>
               </>
             )}
@@ -207,51 +205,51 @@ export default function EPSValuationCalculatorPage() {
             <button
               key={sym}
               onClick={() => handleQuickSelect(sym)}
-              className={`px-2.5 py-1 rounded-lg font-mono font-semibold transition-all cursor-pointer ${
+              className={`px-2.5 py-1 rounded-[3px] font-mono font-semibold text-xs transition-colors cursor-pointer ${
                 activeTicker === sym
-                  ? 'bg-indigo-600 text-white shadow-sm'
-                  : 'bg-zinc-900/80 text-zinc-300 hover:bg-zinc-800 hover:text-white border border-zinc-800'
+                  ? 'bg-white text-[#131111]'
+                  : 'bg-[#131111] text-[#8e8b8b] hover:text-white border border-[#2e2c2c]'
               }`}
             >
-              {sym}
+              [{sym}]
             </button>
           ))}
 
           {dataSource && (
-            <span className="ml-auto text-[11px] text-zinc-500 inline-flex items-center gap-1 font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              Source: {dataSource}
+            <span className="ml-auto text-[11px] text-[#656363] inline-flex items-center gap-1.5 font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#03B000]" />
+              source: {dataSource}
             </span>
           )}
         </div>
 
         {errorMsg && (
-          <div className="p-3 rounded-lg bg-rose-950/40 border border-rose-800/50 text-xs text-rose-300 flex items-center gap-2">
-            <Info className="w-4 h-4 text-rose-400 flex-shrink-0" />
+          <div className="p-2.5 rounded-[3px] bg-rose-950/30 border border-rose-800/40 text-xs text-rose-300 flex items-center gap-2">
+            <Info className="w-3.5 h-3.5 text-rose-400 flex-shrink-0" />
             <span>{errorMsg}</span>
           </div>
         )}
       </div>
 
       {/* Company Stat Bar */}
-      <div className="glass-panel-glow rounded-2xl p-6 border border-zinc-800 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-800/70">
+      <div className="border border-[#2e2c2c] bg-[#171616] rounded-[4px] p-5 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#2e2c2c]">
           <div>
             <div className="flex items-center gap-2.5">
-              <h2 className="text-2xl font-black text-white tracking-tight font-mono">
+              <h2 className="text-xl font-bold text-white tracking-tight font-mono">
                 {fundamentals.symbol}
               </h2>
-              <span className="text-sm font-semibold text-zinc-300">
+              <span className="text-xs font-semibold text-[#cfcecd]">
                 {fundamentals.name}
               </span>
               {fundamentals.exchange && (
-                <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">
+                <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded-[2px] bg-[#131111] text-[#8e8b8b] border border-[#2e2c2c]">
                   {fundamentals.exchange}
                 </span>
               )}
             </div>
-            <p className="text-xs text-zinc-400 mt-0.5">
-              {fundamentals.sector || 'Equities'} • Base Currency: {fundamentals.currency}
+            <p className="text-xs text-[#8e8b8b] font-mono mt-0.5">
+              {fundamentals.sector || 'Equities'} {'//'} Base: {fundamentals.currency}
             </p>
           </div>
 
@@ -412,42 +410,42 @@ export default function EPSValuationCalculatorPage() {
       </div>
 
       {/* Constraint Mechanism Callout Banner */}
-      <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-indigo-950/40 border border-indigo-500/20 text-xs text-indigo-300">
-        <Lock className="w-4 h-4 text-indigo-400 flex-shrink-0" />
+      <div className="flex items-center gap-2 px-3.5 py-2 rounded-[3px] bg-[#171616] border border-[#2e2c2c] text-xs font-mono text-[#8e8b8b]">
+        <Lock className="w-3.5 h-3.5 text-[#cfcecd] flex-shrink-0" />
         <span>
-          <strong>Harmonized Floor &amp; Ceiling Constraints Active:</strong> Bear inputs serve as a floor for Base/Bull, while Bull inputs serve as a ceiling. Adjusting any boundary dynamically guides adjacent scenarios.
+          <strong className="text-white font-medium">[FLOOR_&amp;_CEILING_LOCK_ACTIVE]</strong> Bear inputs enforce the floor; Bull inputs enforce the ceiling. Adjusting any parameter dynamically aligns adjacent cases.
         </span>
       </div>
 
       {/* 3-Column Scenario Cards Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* 1. BEAR SCENARIO CARD */}
-        <div className="glass-panel-glow rounded-3xl p-6 border border-rose-500/40 bg-gradient-to-b from-rose-950/20 via-zinc-900/40 to-zinc-900/90 flex flex-col justify-between relative overflow-hidden">
-          <div className="space-y-5">
+        <div className="border border-[#2e2c2c] border-t-2 border-t-rose-500/80 bg-[#171616] p-5 rounded-[4px] flex flex-col justify-between">
+          <div className="space-y-4">
             {/* Header Badge */}
-            <div className="flex items-center justify-between">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-rose-400 bg-rose-500/10 border border-rose-500/30">
-                <TrendingDown className="w-3.5 h-3.5" />
+            <div className="flex items-center justify-between font-mono text-xs">
+              <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[2px] text-xs font-mono font-semibold text-rose-400 bg-rose-950/30 border border-rose-800/40">
+                <TrendingDown className="w-3 h-3" />
                 <span>Bear Case</span>
               </div>
-              <span className="text-[11px] text-zinc-500 font-mono">Conservative Floor</span>
+              <span className="text-[11px] text-[#656363]">Floor Baseline</span>
             </div>
 
             {/* Hero Target Price Display */}
-            <div className="bg-zinc-950/70 p-4 rounded-2xl border border-rose-900/40 text-center space-y-2">
-              <span className="text-xs uppercase tracking-wider font-semibold text-zinc-400 block">
+            <div className="bg-[#131111] p-3.5 rounded-[3px] border border-[#2e2c2c] text-center space-y-1.5">
+              <span className="text-[10px] uppercase font-mono text-[#8e8b8b] block">
                 Year 5 Target Price
               </span>
-              <div className="text-3xl sm:text-4xl font-black text-rose-400 font-mono">
+              <div className="text-3xl font-black text-rose-400 font-mono">
                 {formatCurrency(bearResult.year5TargetPrice, fundamentals.currency)}
               </div>
 
-              <div className="flex items-center justify-center gap-2 pt-1">
+              <div className="flex items-center justify-center gap-2 pt-1 font-mono text-xs">
                 <span
-                  className={`text-xs font-bold px-2.5 py-1 rounded-md font-mono ${
+                  className={`px-2 py-0.5 rounded-[2px] font-bold ${
                     bearResult.totalReturnPercent >= 0
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                      : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                      ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-800/30'
+                      : 'bg-rose-950/40 text-rose-400 border border-rose-800/30'
                   }`}
                 >
                   {bearResult.totalReturnPercent >= 0 ? '+' : ''}
@@ -455,13 +453,13 @@ export default function EPSValuationCalculatorPage() {
                 </span>
 
                 <span
-                  className={`text-xs font-bold px-2.5 py-1 rounded-md font-mono ${
+                  className={`px-2 py-0.5 rounded-[2px] font-bold ${
                     bearResult.fiveYearCAGRPercent >= 0
-                      ? 'bg-emerald-950/60 text-emerald-400 border border-emerald-800/40'
-                      : 'bg-rose-950/60 text-rose-400 border border-rose-800/40'
+                      ? 'bg-[#1a1919] text-emerald-400 border border-[#2e2c2c]'
+                      : 'bg-[#1a1919] text-rose-400 border border-[#2e2c2c]'
                   }`}
                 >
-                  CAGR: {formatPercent(bearResult.fiveYearCAGRPercent, true)}/yr
+                  {formatPercent(bearResult.fiveYearCAGRPercent, true)}/yr
                 </span>
               </div>
             </div>
@@ -578,32 +576,32 @@ export default function EPSValuationCalculatorPage() {
         </div>
 
         {/* 2. BASE SCENARIO CARD */}
-        <div className="glass-panel-glow rounded-3xl p-6 border-2 border-amber-500/50 bg-gradient-to-b from-amber-950/20 via-zinc-900/50 to-zinc-900/90 flex flex-col justify-between relative overflow-hidden shadow-2xl ring-1 ring-amber-500/20">
-          <div className="space-y-5">
+        <div className="border border-[#2e2c2c] border-t-2 border-t-amber-500/80 bg-[#171616] p-5 rounded-[4px] flex flex-col justify-between">
+          <div className="space-y-4">
             {/* Header Badge */}
-            <div className="flex items-center justify-between">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30">
-                <BarChart3 className="w-3.5 h-3.5" />
+            <div className="flex items-center justify-between font-mono text-xs">
+              <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[2px] text-xs font-mono font-semibold text-amber-400 bg-amber-950/30 border border-amber-800/40">
+                <BarChart3 className="w-3 h-3" />
                 <span>Base Case (Consensus)</span>
               </div>
-              <span className="text-[11px] text-amber-400 font-mono font-semibold">Primary Target</span>
+              <span className="text-[11px] text-amber-400/90 font-mono">Primary Target</span>
             </div>
 
             {/* Hero Target Price Display */}
-            <div className="bg-zinc-950/70 p-4 rounded-2xl border border-amber-900/40 text-center space-y-2">
-              <span className="text-xs uppercase tracking-wider font-semibold text-zinc-400 block">
+            <div className="bg-[#131111] p-3.5 rounded-[3px] border border-[#2e2c2c] text-center space-y-1.5">
+              <span className="text-[10px] uppercase font-mono text-[#8e8b8b] block">
                 Year 5 Target Price
               </span>
-              <div className="text-3xl sm:text-4xl font-black text-amber-400 font-mono">
+              <div className="text-3xl font-black text-amber-400 font-mono">
                 {formatCurrency(baseResult.year5TargetPrice, fundamentals.currency)}
               </div>
 
-              <div className="flex items-center justify-center gap-2 pt-1">
+              <div className="flex items-center justify-center gap-2 pt-1 font-mono text-xs">
                 <span
-                  className={`text-xs font-bold px-2.5 py-1 rounded-md font-mono ${
+                  className={`px-2 py-0.5 rounded-[2px] font-bold ${
                     baseResult.totalReturnPercent >= 0
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                      : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                      ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-800/30'
+                      : 'bg-rose-950/40 text-rose-400 border border-rose-800/30'
                   }`}
                 >
                   {baseResult.totalReturnPercent >= 0 ? '+' : ''}
@@ -611,13 +609,13 @@ export default function EPSValuationCalculatorPage() {
                 </span>
 
                 <span
-                  className={`text-xs font-bold px-2.5 py-1 rounded-md font-mono ${
+                  className={`px-2 py-0.5 rounded-[2px] font-bold ${
                     baseResult.fiveYearCAGRPercent >= 0
-                      ? 'bg-emerald-950/60 text-emerald-400 border border-emerald-800/40'
-                      : 'bg-rose-950/60 text-rose-400 border border-rose-800/40'
+                      ? 'bg-[#1a1919] text-emerald-400 border border-[#2e2c2c]'
+                      : 'bg-[#1a1919] text-rose-400 border border-[#2e2c2c]'
                   }`}
                 >
-                  CAGR: {formatPercent(baseResult.fiveYearCAGRPercent, true)}/yr
+                  {formatPercent(baseResult.fiveYearCAGRPercent, true)}/yr
                 </span>
               </div>
             </div>
@@ -626,8 +624,8 @@ export default function EPSValuationCalculatorPage() {
             <div className="space-y-4 pt-2 text-xs">
               {/* Revenue Growth Slider */}
               <div className="space-y-1.5">
-                <div className="flex justify-between items-center text-zinc-300">
-                  <span className="font-medium">Annual Revenue Growth</span>
+                <div className="flex justify-between items-center text-[#cfcecd]">
+                  <span className="font-mono text-xs">Annual Revenue Growth</span>
                   <div className="flex items-center gap-1.5">
                     <input
                       type="number"
@@ -636,9 +634,9 @@ export default function EPSValuationCalculatorPage() {
                       onChange={(e) =>
                         handleScenarioChange('base', 'growthRate', (parseFloat(e.target.value) || 0) / 100)
                       }
-                      className="w-16 text-right bg-zinc-900 border border-zinc-700 text-amber-400 font-mono font-bold px-1.5 py-0.5 rounded"
+                      className="w-16 text-right bg-[#131111] border border-[#2e2c2c] text-amber-400 font-mono font-bold px-1.5 py-0.5 rounded-[2px]"
                     />
-                    <span className="text-zinc-500 font-mono">%</span>
+                    <span className="text-[#656363] font-mono">%</span>
                   </div>
                 </div>
                 <input
@@ -650,14 +648,14 @@ export default function EPSValuationCalculatorPage() {
                   onChange={(e) =>
                     handleScenarioChange('base', 'growthRate', parseFloat(e.target.value))
                   }
-                  className="w-full accent-amber-500 cursor-pointer h-1.5 bg-zinc-800 rounded-lg"
+                  className="w-full accent-amber-500 cursor-pointer h-1.5 bg-[#252323] rounded-sm"
                 />
               </div>
 
               {/* Net Margin Slider */}
               <div className="space-y-1.5">
-                <div className="flex justify-between items-center text-zinc-300">
-                  <span className="font-medium">Target Net Margin</span>
+                <div className="flex justify-between items-center text-[#cfcecd]">
+                  <span className="font-mono text-xs">Target Net Margin</span>
                   <div className="flex items-center gap-1.5">
                     <input
                       type="number"
@@ -666,9 +664,9 @@ export default function EPSValuationCalculatorPage() {
                       onChange={(e) =>
                         handleScenarioChange('base', 'netMargin', (parseFloat(e.target.value) || 0) / 100)
                       }
-                      className="w-16 text-right bg-zinc-900 border border-zinc-700 text-zinc-200 font-mono font-bold px-1.5 py-0.5 rounded"
+                      className="w-16 text-right bg-[#131111] border border-[#2e2c2c] text-[#cfcecd] font-mono font-bold px-1.5 py-0.5 rounded-[2px]"
                     />
-                    <span className="text-zinc-500 font-mono">%</span>
+                    <span className="text-[#656363] font-mono">%</span>
                   </div>
                 </div>
                 <input
@@ -680,14 +678,14 @@ export default function EPSValuationCalculatorPage() {
                   onChange={(e) =>
                     handleScenarioChange('base', 'netMargin', parseFloat(e.target.value))
                   }
-                  className="w-full accent-amber-400 cursor-pointer h-1.5 bg-zinc-800 rounded-lg"
+                  className="w-full accent-amber-400 cursor-pointer h-1.5 bg-[#252323] rounded-sm"
                 />
               </div>
 
               {/* Exit P/E Multiple Slider */}
               <div className="space-y-1.5">
-                <div className="flex justify-between items-center text-zinc-300">
-                  <span className="font-medium">Exit P/E Multiple</span>
+                <div className="flex justify-between items-center text-[#cfcecd]">
+                  <span className="font-mono text-xs">Exit P/E Multiple</span>
                   <div className="flex items-center gap-1.5">
                     <input
                       type="number"
@@ -696,9 +694,9 @@ export default function EPSValuationCalculatorPage() {
                       onChange={(e) =>
                         handleScenarioChange('base', 'exitPE', parseInt(e.target.value) || 5)
                       }
-                      className="w-14 text-right bg-zinc-900 border border-zinc-700 text-zinc-200 font-mono font-bold px-1.5 py-0.5 rounded"
+                      className="w-14 text-right bg-[#131111] border border-[#2e2c2c] text-[#cfcecd] font-mono font-bold px-1.5 py-0.5 rounded-[2px]"
                     />
-                    <span className="text-zinc-500 font-mono">x</span>
+                    <span className="text-[#656363] font-mono">x</span>
                   </div>
                 </div>
                 <input
@@ -710,56 +708,56 @@ export default function EPSValuationCalculatorPage() {
                   onChange={(e) =>
                     handleScenarioChange('base', 'exitPE', parseInt(e.target.value))
                   }
-                  className="w-full accent-amber-400 cursor-pointer h-1.5 bg-zinc-800 rounded-lg"
+                  className="w-full accent-amber-400 cursor-pointer h-1.5 bg-[#252323] rounded-sm"
                 />
               </div>
             </div>
           </div>
 
           {/* Card Summary Breakdown */}
-          <div className="mt-5 pt-4 border-t border-zinc-800/80 space-y-1.5 text-[11px] text-zinc-400">
+          <div className="mt-5 pt-4 border-t border-[#2e2c2c] space-y-1.5 text-[11px] text-[#8e8b8b] font-mono">
             <div className="flex justify-between">
               <span>Year 5 Revenue:</span>
-              <span className="font-mono text-zinc-200">{formatLargeNumber(baseResult.year5Revenue)}</span>
+              <span className="text-[#cfcecd]">{formatLargeNumber(baseResult.year5Revenue)}</span>
             </div>
             <div className="flex justify-between">
               <span>Year 5 Net Income:</span>
-              <span className="font-mono text-zinc-200">{formatLargeNumber(baseResult.year5NetIncome)}</span>
+              <span className="text-[#cfcecd]">{formatLargeNumber(baseResult.year5NetIncome)}</span>
             </div>
-            <div className="flex justify-between font-semibold text-zinc-200 pt-1 border-t border-zinc-800/40">
+            <div className="flex justify-between font-semibold text-white pt-1 border-t border-[#252323]">
               <span>Year 5 EPS:</span>
-              <span className="font-mono text-amber-300">${baseResult.year5EPS.toFixed(2)}</span>
+              <span className="text-amber-400">${baseResult.year5EPS.toFixed(2)}</span>
             </div>
           </div>
         </div>
 
         {/* 3. BULL SCENARIO CARD */}
-        <div className="glass-panel-glow rounded-3xl p-6 border border-emerald-500/40 bg-gradient-to-b from-emerald-950/20 via-zinc-900/40 to-zinc-900/90 flex flex-col justify-between relative overflow-hidden">
-          <div className="space-y-5">
+        <div className="border border-[#2e2c2c] border-t-2 border-t-emerald-500/80 bg-[#171616] p-5 rounded-[4px] flex flex-col justify-between">
+          <div className="space-y-4">
             {/* Header Badge */}
-            <div className="flex items-center justify-between">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30">
-                <TrendingUp className="w-3.5 h-3.5" />
+            <div className="flex items-center justify-between font-mono text-xs">
+              <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[2px] text-xs font-mono font-semibold text-emerald-400 bg-emerald-950/30 border border-emerald-800/40">
+                <TrendingUp className="w-3 h-3" />
                 <span>Bull Case</span>
               </div>
-              <span className="text-[11px] text-zinc-500 font-mono">Optimistic Ceiling</span>
+              <span className="text-[11px] text-[#656363]">Optimistic Ceiling</span>
             </div>
 
             {/* Hero Target Price Display */}
-            <div className="bg-zinc-950/70 p-4 rounded-2xl border border-emerald-900/40 text-center space-y-2">
-              <span className="text-xs uppercase tracking-wider font-semibold text-zinc-400 block">
+            <div className="bg-[#131111] p-3.5 rounded-[3px] border border-[#2e2c2c] text-center space-y-1.5">
+              <span className="text-[10px] uppercase font-mono text-[#8e8b8b] block">
                 Year 5 Target Price
               </span>
-              <div className="text-3xl sm:text-4xl font-black text-emerald-400 font-mono">
+              <div className="text-3xl font-black text-emerald-400 font-mono">
                 {formatCurrency(bullResult.year5TargetPrice, fundamentals.currency)}
               </div>
 
-              <div className="flex items-center justify-center gap-2 pt-1">
+              <div className="flex items-center justify-center gap-2 pt-1 font-mono text-xs">
                 <span
-                  className={`text-xs font-bold px-2.5 py-1 rounded-md font-mono ${
+                  className={`px-2 py-0.5 rounded-[2px] font-bold ${
                     bullResult.totalReturnPercent >= 0
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                      : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                      ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-800/30'
+                      : 'bg-rose-950/40 text-rose-400 border border-rose-800/30'
                   }`}
                 >
                   {bullResult.totalReturnPercent >= 0 ? '+' : ''}
@@ -767,13 +765,13 @@ export default function EPSValuationCalculatorPage() {
                 </span>
 
                 <span
-                  className={`text-xs font-bold px-2.5 py-1 rounded-md font-mono ${
+                  className={`px-2 py-0.5 rounded-[2px] font-bold ${
                     bullResult.fiveYearCAGRPercent >= 0
-                      ? 'bg-emerald-950/60 text-emerald-400 border border-emerald-800/40'
-                      : 'bg-rose-950/60 text-rose-400 border border-rose-800/40'
+                      ? 'bg-[#1a1919] text-emerald-400 border border-[#2e2c2c]'
+                      : 'bg-[#1a1919] text-rose-400 border border-[#2e2c2c]'
                   }`}
                 >
-                  CAGR: {formatPercent(bullResult.fiveYearCAGRPercent, true)}/yr
+                  {formatPercent(bullResult.fiveYearCAGRPercent, true)}/yr
                 </span>
               </div>
             </div>
@@ -782,8 +780,8 @@ export default function EPSValuationCalculatorPage() {
             <div className="space-y-4 pt-2 text-xs">
               {/* Revenue Growth Slider */}
               <div className="space-y-1.5">
-                <div className="flex justify-between items-center text-zinc-300">
-                  <span className="font-medium">Annual Revenue Growth</span>
+                <div className="flex justify-between items-center text-[#cfcecd]">
+                  <span className="font-mono text-xs">Annual Revenue Growth</span>
                   <div className="flex items-center gap-1.5">
                     <input
                       type="number"
@@ -792,9 +790,9 @@ export default function EPSValuationCalculatorPage() {
                       onChange={(e) =>
                         handleScenarioChange('bull', 'growthRate', (parseFloat(e.target.value) || 0) / 100)
                       }
-                      className="w-16 text-right bg-zinc-900 border border-zinc-700 text-emerald-400 font-mono font-bold px-1.5 py-0.5 rounded"
+                      className="w-16 text-right bg-[#131111] border border-[#2e2c2c] text-emerald-400 font-mono font-bold px-1.5 py-0.5 rounded-[2px]"
                     />
-                    <span className="text-zinc-500 font-mono">%</span>
+                    <span className="text-[#656363] font-mono">%</span>
                   </div>
                 </div>
                 <input
@@ -806,14 +804,14 @@ export default function EPSValuationCalculatorPage() {
                   onChange={(e) =>
                     handleScenarioChange('bull', 'growthRate', parseFloat(e.target.value))
                   }
-                  className="w-full accent-emerald-500 cursor-pointer h-1.5 bg-zinc-800 rounded-lg"
+                  className="w-full accent-emerald-500 cursor-pointer h-1.5 bg-[#252323] rounded-sm"
                 />
               </div>
 
               {/* Net Margin Slider */}
               <div className="space-y-1.5">
-                <div className="flex justify-between items-center text-zinc-300">
-                  <span className="font-medium">Target Net Margin</span>
+                <div className="flex justify-between items-center text-[#cfcecd]">
+                  <span className="font-mono text-xs">Target Net Margin</span>
                   <div className="flex items-center gap-1.5">
                     <input
                       type="number"
@@ -822,9 +820,9 @@ export default function EPSValuationCalculatorPage() {
                       onChange={(e) =>
                         handleScenarioChange('bull', 'netMargin', (parseFloat(e.target.value) || 0) / 100)
                       }
-                      className="w-16 text-right bg-zinc-900 border border-zinc-700 text-zinc-200 font-mono font-bold px-1.5 py-0.5 rounded"
+                      className="w-16 text-right bg-[#131111] border border-[#2e2c2c] text-[#cfcecd] font-mono font-bold px-1.5 py-0.5 rounded-[2px]"
                     />
-                    <span className="text-zinc-500 font-mono">%</span>
+                    <span className="text-[#656363] font-mono">%</span>
                   </div>
                 </div>
                 <input
@@ -836,14 +834,14 @@ export default function EPSValuationCalculatorPage() {
                   onChange={(e) =>
                     handleScenarioChange('bull', 'netMargin', parseFloat(e.target.value))
                   }
-                  className="w-full accent-emerald-400 cursor-pointer h-1.5 bg-zinc-800 rounded-lg"
+                  className="w-full accent-emerald-400 cursor-pointer h-1.5 bg-[#252323] rounded-sm"
                 />
               </div>
 
               {/* Exit P/E Multiple Slider */}
               <div className="space-y-1.5">
-                <div className="flex justify-between items-center text-zinc-300">
-                  <span className="font-medium">Exit P/E Multiple</span>
+                <div className="flex justify-between items-center text-[#cfcecd]">
+                  <span className="font-mono text-xs">Exit P/E Multiple</span>
                   <div className="flex items-center gap-1.5">
                     <input
                       type="number"
@@ -852,9 +850,9 @@ export default function EPSValuationCalculatorPage() {
                       onChange={(e) =>
                         handleScenarioChange('bull', 'exitPE', parseInt(e.target.value) || 5)
                       }
-                      className="w-14 text-right bg-zinc-900 border border-zinc-700 text-zinc-200 font-mono font-bold px-1.5 py-0.5 rounded"
+                      className="w-14 text-right bg-[#131111] border border-[#2e2c2c] text-[#cfcecd] font-mono font-bold px-1.5 py-0.5 rounded-[2px]"
                     />
-                    <span className="text-zinc-500 font-mono">x</span>
+                    <span className="text-[#656363] font-mono">x</span>
                   </div>
                 </div>
                 <input
@@ -866,53 +864,55 @@ export default function EPSValuationCalculatorPage() {
                   onChange={(e) =>
                     handleScenarioChange('bull', 'exitPE', parseInt(e.target.value))
                   }
-                  className="w-full accent-emerald-400 cursor-pointer h-1.5 bg-zinc-800 rounded-lg"
+                  className="w-full accent-emerald-400 cursor-pointer h-1.5 bg-[#252323] rounded-sm"
                 />
               </div>
             </div>
           </div>
 
           {/* Card Summary Breakdown */}
-          <div className="mt-5 pt-4 border-t border-zinc-800/80 space-y-1.5 text-[11px] text-zinc-400">
+          <div className="mt-5 pt-4 border-t border-[#2e2c2c] space-y-1.5 text-[11px] text-[#8e8b8b] font-mono">
             <div className="flex justify-between">
               <span>Year 5 Revenue:</span>
-              <span className="font-mono text-zinc-200">{formatLargeNumber(bullResult.year5Revenue)}</span>
+              <span className="text-[#cfcecd]">{formatLargeNumber(bullResult.year5Revenue)}</span>
             </div>
             <div className="flex justify-between">
               <span>Year 5 Net Income:</span>
-              <span className="font-mono text-zinc-200">{formatLargeNumber(bullResult.year5NetIncome)}</span>
+              <span className="text-[#cfcecd]">{formatLargeNumber(bullResult.year5NetIncome)}</span>
             </div>
-            <div className="flex justify-between font-semibold text-zinc-200 pt-1 border-t border-zinc-800/40">
+            <div className="flex justify-between font-semibold text-white pt-1 border-t border-[#252323]">
               <span>Year 5 EPS:</span>
-              <span className="font-mono text-emerald-300">${bullResult.year5EPS.toFixed(2)}</span>
+              <span className="text-emerald-400">${bullResult.year5EPS.toFixed(2)}</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Year-by-Year Growth Table Section */}
-      <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-zinc-800 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
+      <div className="border border-[#2e2c2c] bg-[#171616] rounded-[4px] p-5 sm:p-6 space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#2e2c2c]">
           <div className="space-y-1">
-            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-              <Layers className="w-5 h-5 text-indigo-400" />
-              <span>Year-by-Year Financial Progression (Years 1 to 5)</span>
-            </h3>
-            <p className="text-xs text-zinc-400">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono text-[#8e8b8b]">[Fig 2. Compounding]</span>
+              <h3 className="text-sm font-semibold text-white font-mono uppercase tracking-wider">
+                Year-by-Year Progression (Years 1 to 5)
+              </h3>
+            </div>
+            <p className="text-xs text-[#8e8b8b]">
               Annual compounding schedule of Projected Revenue, Net Income, and EPS.
             </p>
           </div>
 
           {/* Tab Selector */}
-          <div className="flex items-center gap-1 bg-zinc-900 p-1 rounded-xl border border-zinc-800 self-start">
+          <div className="flex items-center gap-1 bg-[#131111] p-1 rounded-[3px] border border-[#2e2c2c] self-start font-mono text-xs">
             {(['comparison', 'base', 'bear', 'bull'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-lg capitalize transition-all cursor-pointer ${
+                className={`px-2.5 py-1 text-xs rounded-[2px] uppercase transition-all cursor-pointer ${
                   activeTab === tab
-                    ? 'bg-indigo-600 text-white shadow-sm'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-white text-[#131111] font-semibold'
+                    : 'text-[#8e8b8b] hover:text-white'
                 }`}
               >
                 {tab === 'comparison' ? '3-Case Summary' : `${tab} Case`}
@@ -926,73 +926,73 @@ export default function EPSValuationCalculatorPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse font-mono">
               <thead>
-                <tr className="border-b border-zinc-800 text-zinc-400">
-                  <th className="py-3 px-4 font-sans font-semibold">Valuation Metric</th>
-                  <th className="py-3 px-4 text-rose-400 font-sans font-semibold">Bear Case</th>
-                  <th className="py-3 px-4 text-amber-400 font-sans font-semibold">Base Case</th>
-                  <th className="py-3 px-4 text-emerald-400 font-sans font-semibold">Bull Case</th>
+                <tr className="border-b border-[#2e2c2c] text-[#8e8b8b]">
+                  <th className="py-2.5 px-3 font-mono font-semibold uppercase text-[11px]">Valuation Metric</th>
+                  <th className="py-2.5 px-3 text-rose-400 font-mono font-semibold uppercase text-[11px]">Bear Case</th>
+                  <th className="py-2.5 px-3 text-amber-400 font-mono font-semibold uppercase text-[11px]">Base Case</th>
+                  <th className="py-2.5 px-3 text-emerald-400 font-mono font-semibold uppercase text-[11px]">Bull Case</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800/60 text-zinc-300">
+              <tbody className="divide-y divide-[#252323] text-[#cfcecd]">
                 <tr>
-                  <td className="py-2.5 px-4 font-sans text-zinc-400">Revenue Growth Rate YoY</td>
-                  <td className="py-2.5 px-4 text-rose-300">{(scenarios.bear.growthRate * 100).toFixed(1)}%</td>
-                  <td className="py-2.5 px-4 text-amber-300">{(scenarios.base.growthRate * 100).toFixed(1)}%</td>
-                  <td className="py-2.5 px-4 text-emerald-300">{(scenarios.bull.growthRate * 100).toFixed(1)}%</td>
-                </tr>
-                <tr>
-                  <td className="py-2.5 px-4 font-sans text-zinc-400">Target Net Profit Margin</td>
-                  <td className="py-2.5 px-4">{(scenarios.bear.netMargin * 100).toFixed(1)}%</td>
-                  <td className="py-2.5 px-4">{(scenarios.base.netMargin * 100).toFixed(1)}%</td>
-                  <td className="py-2.5 px-4">{(scenarios.bull.netMargin * 100).toFixed(1)}%</td>
+                  <td className="py-2.5 px-3 text-[#8e8b8b]">Revenue Growth Rate YoY</td>
+                  <td className="py-2.5 px-3 text-rose-300">{(scenarios.bear.growthRate * 100).toFixed(1)}%</td>
+                  <td className="py-2.5 px-3 text-amber-300">{(scenarios.base.growthRate * 100).toFixed(1)}%</td>
+                  <td className="py-2.5 px-3 text-emerald-300">{(scenarios.bull.growthRate * 100).toFixed(1)}%</td>
                 </tr>
                 <tr>
-                  <td className="py-2.5 px-4 font-sans text-zinc-400">Exit P/E Multiple</td>
-                  <td className="py-2.5 px-4">{scenarios.bear.exitPE}x</td>
-                  <td className="py-2.5 px-4">{scenarios.base.exitPE}x</td>
-                  <td className="py-2.5 px-4">{scenarios.bull.exitPE}x</td>
-                </tr>
-                <tr className="bg-zinc-900/40">
-                  <td className="py-2.5 px-4 font-sans text-zinc-300 font-medium">Projected Year 5 Revenue</td>
-                  <td className="py-2.5 px-4 text-zinc-100">{formatLargeNumber(bearResult.year5Revenue)}</td>
-                  <td className="py-2.5 px-4 text-zinc-100">{formatLargeNumber(baseResult.year5Revenue)}</td>
-                  <td className="py-2.5 px-4 text-zinc-100">{formatLargeNumber(bullResult.year5Revenue)}</td>
+                  <td className="py-2.5 px-3 text-[#8e8b8b]">Target Net Profit Margin</td>
+                  <td className="py-2.5 px-3">{(scenarios.bear.netMargin * 100).toFixed(1)}%</td>
+                  <td className="py-2.5 px-3">{(scenarios.base.netMargin * 100).toFixed(1)}%</td>
+                  <td className="py-2.5 px-3">{(scenarios.bull.netMargin * 100).toFixed(1)}%</td>
                 </tr>
                 <tr>
-                  <td className="py-2.5 px-4 font-sans text-zinc-400">Projected Year 5 Net Income</td>
-                  <td className="py-2.5 px-4 text-zinc-200">{formatLargeNumber(bearResult.year5NetIncome)}</td>
-                  <td className="py-2.5 px-4 text-zinc-200">{formatLargeNumber(baseResult.year5NetIncome)}</td>
-                  <td className="py-2.5 px-4 text-zinc-200">{formatLargeNumber(bullResult.year5NetIncome)}</td>
+                  <td className="py-2.5 px-3 text-[#8e8b8b]">Exit P/E Multiple</td>
+                  <td className="py-2.5 px-3">{scenarios.bear.exitPE}x</td>
+                  <td className="py-2.5 px-3">{scenarios.base.exitPE}x</td>
+                  <td className="py-2.5 px-3">{scenarios.bull.exitPE}x</td>
                 </tr>
-                <tr className="bg-zinc-900/60 font-semibold">
-                  <td className="py-3 px-4 font-sans text-zinc-200">Projected Year 5 EPS</td>
-                  <td className="py-3 px-4 text-rose-300">${bearResult.year5EPS.toFixed(2)}</td>
-                  <td className="py-3 px-4 text-amber-300">${baseResult.year5EPS.toFixed(2)}</td>
-                  <td className="py-3 px-4 text-emerald-300">${bullResult.year5EPS.toFixed(2)}</td>
-                </tr>
-                <tr className="bg-indigo-950/30 border-t-2 border-indigo-500/40 font-black text-sm">
-                  <td className="py-3.5 px-4 font-sans text-white">Projected Year 5 Stock Price</td>
-                  <td className="py-3.5 px-4 text-rose-400">{formatCurrency(bearResult.year5TargetPrice, fundamentals.currency)}</td>
-                  <td className="py-3.5 px-4 text-amber-400">{formatCurrency(baseResult.year5TargetPrice, fundamentals.currency)}</td>
-                  <td className="py-3.5 px-4 text-emerald-400">{formatCurrency(bullResult.year5TargetPrice, fundamentals.currency)}</td>
+                <tr className="bg-[#131111]">
+                  <td className="py-2.5 px-3 text-white font-medium">Projected Year 5 Revenue</td>
+                  <td className="py-2.5 px-3 text-white">{formatLargeNumber(bearResult.year5Revenue)}</td>
+                  <td className="py-2.5 px-3 text-white">{formatLargeNumber(baseResult.year5Revenue)}</td>
+                  <td className="py-2.5 px-3 text-white">{formatLargeNumber(bullResult.year5Revenue)}</td>
                 </tr>
                 <tr>
-                  <td className="py-2.5 px-4 font-sans text-zinc-400">Total 5-Year Return %</td>
-                  <td className={`py-2.5 px-4 font-bold ${bearResult.totalReturnPercent >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  <td className="py-2.5 px-3 text-[#8e8b8b]">Projected Year 5 Net Income</td>
+                  <td className="py-2.5 px-3 text-[#cfcecd]">{formatLargeNumber(bearResult.year5NetIncome)}</td>
+                  <td className="py-2.5 px-3 text-[#cfcecd]">{formatLargeNumber(baseResult.year5NetIncome)}</td>
+                  <td className="py-2.5 px-3 text-[#cfcecd]">{formatLargeNumber(bullResult.year5NetIncome)}</td>
+                </tr>
+                <tr className="bg-[#131111] font-semibold">
+                  <td className="py-2.5 px-3 text-white">Projected Year 5 EPS</td>
+                  <td className="py-2.5 px-3 text-rose-300">${bearResult.year5EPS.toFixed(2)}</td>
+                  <td className="py-2.5 px-3 text-amber-300">${baseResult.year5EPS.toFixed(2)}</td>
+                  <td className="py-2.5 px-3 text-emerald-300">${bullResult.year5EPS.toFixed(2)}</td>
+                </tr>
+                <tr className="bg-[#1a1919] border-t-2 border-[#3b3939] font-bold text-sm">
+                  <td className="py-3 px-3 text-white">Projected Year 5 Stock Price</td>
+                  <td className="py-3 px-3 text-rose-400">{formatCurrency(bearResult.year5TargetPrice, fundamentals.currency)}</td>
+                  <td className="py-3 px-3 text-amber-400">{formatCurrency(baseResult.year5TargetPrice, fundamentals.currency)}</td>
+                  <td className="py-3 px-3 text-emerald-400">{formatCurrency(bullResult.year5TargetPrice, fundamentals.currency)}</td>
+                </tr>
+                <tr>
+                  <td className="py-2.5 px-3 text-[#8e8b8b]">Total 5-Year Return %</td>
+                  <td className={`py-2.5 px-3 font-bold ${bearResult.totalReturnPercent >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                     {bearResult.totalReturnPercent >= 0 ? '+' : ''}{bearResult.totalReturnPercent.toFixed(1)}%
                   </td>
-                  <td className={`py-2.5 px-4 font-bold ${baseResult.totalReturnPercent >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  <td className={`py-2.5 px-3 font-bold ${baseResult.totalReturnPercent >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                     {baseResult.totalReturnPercent >= 0 ? '+' : ''}{baseResult.totalReturnPercent.toFixed(1)}%
                   </td>
-                  <td className={`py-2.5 px-4 font-bold ${bullResult.totalReturnPercent >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  <td className={`py-2.5 px-3 font-bold ${bullResult.totalReturnPercent >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                     {bullResult.totalReturnPercent >= 0 ? '+' : ''}{bullResult.totalReturnPercent.toFixed(1)}%
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-2.5 px-4 font-sans text-zinc-400">5-Year Projected CAGR</td>
-                  <td className="py-2.5 px-4 text-zinc-200">{formatPercent(bearResult.fiveYearCAGRPercent, true)}/yr</td>
-                  <td className="py-2.5 px-4 text-zinc-200">{formatPercent(baseResult.fiveYearCAGRPercent, true)}/yr</td>
-                  <td className="py-2.5 px-4 text-zinc-200">{formatPercent(bullResult.fiveYearCAGRPercent, true)}/yr</td>
+                  <td className="py-2.5 px-3 text-[#8e8b8b]">5-Year Projected CAGR</td>
+                  <td className="py-2.5 px-3 text-[#cfcecd]">{formatPercent(bearResult.fiveYearCAGRPercent, true)}/yr</td>
+                  <td className="py-2.5 px-3 text-[#cfcecd]">{formatPercent(baseResult.fiveYearCAGRPercent, true)}/yr</td>
+                  <td className="py-2.5 px-3 text-[#cfcecd]">{formatPercent(bullResult.fiveYearCAGRPercent, true)}/yr</td>
                 </tr>
               </tbody>
             </table>
@@ -1014,51 +1014,51 @@ export default function EPSValuationCalculatorPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse font-mono">
                     <thead>
-                      <tr className="border-b border-zinc-800 text-zinc-400">
-                        <th className="py-3 px-4 font-sans font-semibold">Projection Period</th>
-                        <th className="py-3 px-4 font-sans font-semibold">Projected Revenue</th>
-                        <th className="py-3 px-4 font-sans font-semibold">Projected Net Income</th>
-                        <th className="py-3 px-4 font-sans font-semibold text-right">Projected EPS</th>
+                      <tr className="border-b border-[#2e2c2c] text-[#8e8b8b]">
+                        <th className="py-2.5 px-3 font-mono font-semibold uppercase text-[11px]">Projection Period</th>
+                        <th className="py-2.5 px-3 font-mono font-semibold uppercase text-[11px]">Projected Revenue</th>
+                        <th className="py-2.5 px-3 font-mono font-semibold uppercase text-[11px]">Projected Net Income</th>
+                        <th className="py-2.5 px-3 font-mono font-semibold uppercase text-[11px] text-right">Projected EPS</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-800/60 text-zinc-300">
-                      <tr className="bg-zinc-900/30 text-zinc-400">
-                        <td className="py-2.5 px-4 font-sans font-medium">Base TTM (Year 0)</td>
-                        <td className="py-2.5 px-4 text-blue-400">{formatLargeNumber(fundamentals.totalRevenue)}</td>
-                        <td className="py-2.5 px-4 text-emerald-400">
+                    <tbody className="divide-y divide-[#252323] text-[#cfcecd]">
+                      <tr className="bg-[#131111] text-[#8e8b8b]">
+                        <td className="py-2.5 px-3 font-medium">Base TTM (Year 0)</td>
+                        <td className="py-2.5 px-3 text-[#cfcecd]">{formatLargeNumber(fundamentals.totalRevenue)}</td>
+                        <td className="py-2.5 px-3 text-[#cfcecd]">
                           {formatLargeNumber(fundamentals.totalRevenue * fundamentals.profitMargins)}
                         </td>
-                        <td className="py-2.5 px-4 text-right text-zinc-300">
+                        <td className="py-2.5 px-3 text-right text-white font-bold">
                           ${fundamentals.trailingEps.toFixed(2)}
                         </td>
                       </tr>
                       {res.yearlyProjections.map((proj) => (
-                        <tr key={proj.year} className="hover:bg-zinc-900/40">
-                          <td className="py-2.5 px-4 font-sans font-medium text-zinc-200">
+                        <tr key={proj.year} className="hover:bg-[#131111]/50">
+                          <td className="py-2.5 px-3 font-medium text-white">
                             Year {proj.year}
                           </td>
-                          <td className="py-2.5 px-4 text-blue-300">
+                          <td className="py-2.5 px-3 text-[#cfcecd]">
                             {formatLargeNumber(proj.revenue)}
                           </td>
-                          <td className="py-2.5 px-4 text-emerald-300">
+                          <td className="py-2.5 px-3 text-[#cfcecd]">
                             {formatLargeNumber(proj.netIncome)}
                           </td>
-                          <td className="py-2.5 px-4 text-right font-bold text-zinc-100">
+                          <td className="py-2.5 px-3 text-right font-bold text-white">
                             ${proj.eps.toFixed(2)}
                           </td>
                         </tr>
                       ))}
-                      <tr className="bg-indigo-950/40 font-black text-sm border-t-2 border-indigo-500/40">
-                        <td className="py-3.5 px-4 font-sans text-white">
+                      <tr className="bg-[#1a1919] font-bold text-sm border-t-2 border-[#3b3939]">
+                        <td className="py-3 px-3 text-white">
                           Year 5 Exit Valuation ({res.inputs.exitPE}x P/E):
                         </td>
-                        <td className="py-3.5 px-4 text-blue-300">
+                        <td className="py-3 px-3 text-[#cfcecd]">
                           {formatLargeNumber(res.year5Revenue)}
                         </td>
-                        <td className="py-3.5 px-4 text-emerald-300">
+                        <td className="py-3 px-3 text-[#cfcecd]">
                           {formatLargeNumber(res.year5NetIncome)}
                         </td>
-                        <td className="py-3.5 px-4 text-right text-amber-300 font-mono">
+                        <td className="py-3 px-3 text-right text-amber-400 font-mono">
                           Target: {formatCurrency(res.year5TargetPrice, fundamentals.currency)}
                         </td>
                       </tr>
@@ -1072,33 +1072,33 @@ export default function EPSValuationCalculatorPage() {
       </div>
 
       {/* Financial Math Reference & Model Explanation */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-        <div className="glass-panel p-5 rounded-2xl border border-zinc-800 space-y-2">
-          <div className="flex items-center gap-2 text-indigo-400 font-semibold text-sm">
-            <HelpCircle className="w-4 h-4" />
-            <h4>1. Revenue &amp; EPS Projections</h4>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+        <div className="border border-[#2e2c2c] bg-[#171616] p-4 rounded-[4px] space-y-1.5">
+          <div className="flex items-center gap-1.5 text-white font-mono text-xs font-semibold">
+            <span className="text-[#8e8b8b]">[01]</span>
+            <h4>Revenue &amp; EPS Projections</h4>
           </div>
-          <p className="text-xs text-zinc-400 leading-relaxed">
+          <p className="text-xs text-[#8e8b8b] leading-relaxed">
             Revenue compounds annually at the growth rate over 5 years. Target net profit margin is applied to determine Year 5 Net Income, which is divided by shares outstanding to yield projected Year 5 EPS.
           </p>
         </div>
 
-        <div className="glass-panel p-5 rounded-2xl border border-zinc-800 space-y-2">
-          <div className="flex items-center gap-2 text-indigo-400 font-semibold text-sm">
-            <HelpCircle className="w-4 h-4" />
-            <h4>2. Exit P/E Multiple &amp; Price</h4>
+        <div className="border border-[#2e2c2c] bg-[#171616] p-4 rounded-[4px] space-y-1.5">
+          <div className="flex items-center gap-1.5 text-white font-mono text-xs font-semibold">
+            <span className="text-[#8e8b8b]">[02]</span>
+            <h4>Exit P/E Multiple &amp; Price</h4>
           </div>
-          <p className="text-xs text-zinc-400 leading-relaxed">
+          <p className="text-xs text-[#8e8b8b] leading-relaxed">
             Projected Year 5 Stock Price equals Year 5 EPS multiplied by the Terminal Exit P/E multiple. This represents the market valuation multiple expected at the end of the 5-year holding period.
           </p>
         </div>
 
-        <div className="glass-panel p-5 rounded-2xl border border-zinc-800 space-y-2">
-          <div className="flex items-center gap-2 text-indigo-400 font-semibold text-sm">
-            <HelpCircle className="w-4 h-4" />
-            <h4>3. Total Return &amp; CAGR</h4>
+        <div className="border border-[#2e2c2c] bg-[#171616] p-4 rounded-[4px] space-y-1.5">
+          <div className="flex items-center gap-1.5 text-white font-mono text-xs font-semibold">
+            <span className="text-[#8e8b8b]">[03]</span>
+            <h4>Total Return &amp; CAGR</h4>
           </div>
-          <p className="text-xs text-zinc-400 leading-relaxed">
+          <p className="text-xs text-[#8e8b8b] leading-relaxed">
             CAGR represents the annualized compound return required from the current market price to reach the Year 5 target price. The model automatically ensures Bear &le; Base &le; Bull consistency.
           </p>
         </div>

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#09090b',
+  themeColor: '#131111',
   width: 'device-width',
   initialScale: 1,
 };
@@ -49,17 +49,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark scroll-smooth">
-      <body className="min-h-screen bg-[#09090b] text-zinc-100 antialiased selection:bg-indigo-500/30 selection:text-indigo-200">
-        <div className="relative min-h-screen flex flex-col overflow-x-hidden">
-          {/* Subtle Ambient Background Gradients */}
-          <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-            <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-indigo-500/10 via-blue-500/5 to-transparent blur-3xl opacity-70" />
-            <div className="absolute top-[35%] -left-48 w-96 h-96 bg-purple-500/5 blur-3xl rounded-full pointer-events-none" />
-            <div className="absolute top-[65%] -right-48 w-96 h-96 bg-indigo-500/5 blur-3xl rounded-full pointer-events-none" />
-          </div>
-
+      <body className="min-h-screen bg-[#131111] text-[#cfcecd] antialiased selection:bg-[#3b3939] selection:text-white">
+        <div className="relative min-h-screen flex flex-col">
           <Navbar />
-          <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+          <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
             {children}
           </main>
         </div>

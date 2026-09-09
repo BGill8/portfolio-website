@@ -1,98 +1,126 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 @layer base {
   :root {
-    --background: #09090b;
-    --foreground: #fafafa;
-    --card: #121216;
-    --card-foreground: #fafafa;
-    --border: #27272a;
-    --primary: #3b82f6;
-    --primary-foreground: #ffffff;
-    --muted: #18181b;
-    --muted-foreground: #a1a1aa;
-    --accent: #27272a;
-    --accent-foreground: #fafafa;
+    /* OpenCode Warm Carbon & Paper Theme */
+    --color-bg: #131111;
+    --color-bg-surface: #171616;
+    --color-bg-elevated: #1f1d1d;
+    --color-bg-card: #181717;
+
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #cfcecd;
+    --color-text-muted: #8e8b8b;
+    --color-text-dim: #656363;
+
+    --color-border-weak: #2e2c2c;
+    --color-border-strong: #3b3939;
+
+    --color-success: #03B000;
+    --color-accent: #cfcecd;
+
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   * {
-    border-color: var(--border);
+    border-color: var(--color-border-weak);
   }
 
   html {
     color-scheme: dark;
     scroll-behavior: smooth;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
   }
 
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: var(--color-bg);
+    color: var(--color-text-secondary);
     min-height: 100vh;
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+  }
+
+  code, pre, kbd, samp {
+    font-family: var(--font-mono);
   }
 }
 
-/* Custom card and surface styles */
-.glass-panel {
-  background: rgba(18, 18, 22, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* OpenCode Architectural Panels (Zero Glassmorphism, Zero Glowing Gradients) */
+.opencode-panel {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-weak);
+  border-radius: 0px;
 }
 
-.glass-panel:hover {
-  border-color: rgba(255, 255, 255, 0.15);
+.opencode-panel-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-weak);
+  border-radius: 4px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.opencode-panel-card:hover {
+  border-color: var(--color-border-strong);
+  background-color: var(--color-bg-elevated);
+}
+
+.opencode-btn {
+  font-family: var(--font-mono);
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+/* Legacy utility aliases mapped cleanly to new minimalist tokens */
+.glass-panel {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-weak);
+  border-radius: 4px;
 }
 
 .glass-panel-glow {
-  position: relative;
-  background: rgba(18, 18, 22, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-weak);
+  border-radius: 4px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .glass-panel-glow:hover {
-  border-color: rgba(99, 102, 241, 0.4);
-  box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.15);
-  transform: translateY(-2px);
+  border-color: var(--color-border-strong);
+  background-color: var(--color-bg-elevated);
 }
 
-/* Subtle gradient text */
-.text-gradient-subtle {
-  background: linear-gradient(135deg, #ffffff 30%, #a1a1aa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Technical typography helpers */
+.mono-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: -0.02em;
 }
 
-.text-gradient-accent {
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.ascii-bullet {
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
 }
 
-.text-gradient-brand {
-  background: linear-gradient(135deg, #60a5fa 0%, #818cf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Custom scrollbar for modern browsers */
+/* Minimalist scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 9999px;
+  background: var(--color-border-strong);
+  border-radius: 0px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: var(--color-text-dim);
 }

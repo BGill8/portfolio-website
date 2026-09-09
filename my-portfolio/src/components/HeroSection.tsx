@@ -1,6 +1,8 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
-import { ArrowRight, Award, ExternalLink, FileText, Mail, Sparkles } from 'lucide-react';
-import { BsGithub, BsLinkedin } from 'react-icons/bs';
+import { ArrowRight, Award, Check, Copy, ExternalLink, FileText, Terminal } from 'lucide-react';
 import {
   CONTACT_EMAIL,
   CREDLY_PROFILE_URL,
@@ -12,52 +14,116 @@ interface HeroSectionProps {
   resumeUrl?: string;
 }
 
-const HeroSection = ({ resumeUrl = '/resume.pdf' }: HeroSectionProps) => {
-  return (
-    <section className="pt-10 pb-16 md:pt-16 md:pb-24 border-b border-zinc-800/60" id="about">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-        {/* Left Column: Text & CTAs */}
-        <div className="lg:col-span-8 space-y-6 text-left">
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-indigo-950/60 border border-indigo-500/30 text-indigo-300 shadow-inner">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
-            </span>
-            <span>Master of Science in Artificial Intelligence • Oregon State University</span>
-          </div>
+const TERMINAL_COMMANDS: Record<string, string> = {
+  curl: 'curl -fsSL https://brandongill.dev/api/bio | sh',
+  npx: 'npx brandongill',
+  python: 'pip install brandon-agent-framework',
+  status: 'agent_status: ready // focus: autonomous_systems & mlops',
+};
 
-          {/* Main Title */}
-          <div className="space-y-3">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white">
-              Hi, I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Brandon Gill</span>
+const HeroSection = ({ resumeUrl = '/resume.pdf' }: HeroSectionProps) => {
+  const [activeTab, setActiveTab] = useState<'curl' | 'npx' | 'python' | 'status'>('curl');
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(TERMINAL_COMMANDS[activeTab]);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <section className="pt-6 pb-14 md:pt-12 md:pb-20 border-b border-[#2e2c2c]" id="about">
+      {/* Top Technical Status Banner */}
+      <div className="mb-6 inline-flex items-center gap-2 text-xs font-mono text-[#8e8b8b] border border-[#2e2c2c] bg-[#171616] px-3 py-1 rounded-[3px]">
+        <span className="text-[#cfcecd]">[*]</span>
+        <span>M.S. Artificial Intelligence // Oregon State University</span>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        {/* Left Column: Title, Bio, Terminal Utility */}
+        <div className="lg:col-span-7 space-y-6">
+          <div className="space-y-2">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-sans">
+              Brandon Gill
             </h1>
-            <p className="text-xl sm:text-2xl font-medium text-zinc-300">
-              AI Engineer & Machine Learning Researcher
+            <p className="text-base sm:text-lg font-mono text-[#8e8b8b]">
+              AI Systems Engineer &amp; Machine Learning Researcher
             </p>
           </div>
 
-          {/* Concise Bio */}
-          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl">
-            I am a <strong className="text-zinc-200 font-semibold">Master of Science student at Oregon State University majoring in Artificial Intelligence</strong>. My work focuses on building scalable machine learning systems, autonomous agentic workflows, generative AI architectures, and cloud-native solutions.
+          <p className="text-sm sm:text-base text-[#cfcecd] leading-relaxed max-w-xl font-sans">
+            Graduate student at <strong className="text-white font-semibold">Oregon State University</strong> specializing in Machine Learning and Artificial Intelligence. Building scalable autonomous agent workflows, distributed LLM orchestration pipelines, and cloud-native infrastructure.
           </p>
 
-          {/* Action CTAs */}
-          <div className="flex flex-wrap items-center gap-3 pt-2">
+          {/* Interactive Terminal Quick-Action Box (OpenCode Style) */}
+          <div className="border border-[#2e2c2c] bg-[#171616] rounded-[4px] overflow-hidden max-w-xl">
+            {/* Terminal Header & Tabs */}
+            <div className="flex items-center justify-between border-b border-[#2e2c2c] bg-[#131111] px-2 py-1 font-mono text-xs">
+              <div className="flex items-center space-x-1">
+                {(['curl', 'npx', 'python', 'status'] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`px-2.5 py-1 text-[11px] rounded-[3px] transition-colors cursor-pointer ${
+                      activeTab === tab
+                        ? 'bg-[#1f1d1d] text-white font-semibold'
+                        : 'text-[#8e8b8b] hover:text-[#cfcecd]'
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+              <span className="text-[10px] text-[#656363] pr-2 hidden sm:inline">cli terminal</span>
+            </div>
+
+            {/* Command Display with Copy Action */}
+            <div className="p-3.5 flex items-center justify-between font-mono text-xs text-[#cfcecd] bg-[#171616]">
+              <div className="flex items-center space-x-2 overflow-x-auto select-all pr-2">
+                <span className="text-[#8e8b8b] select-none">&gt;</span>
+                <span className="text-[#ffffff] font-medium whitespace-nowrap">
+                  {TERMINAL_COMMANDS[activeTab]}
+                </span>
+              </div>
+
+              <button
+                onClick={handleCopy}
+                className="flex-shrink-0 p-1.5 text-[#8e8b8b] hover:text-white hover:bg-[#1f1d1d] border border-[#2e2c2c] rounded-[3px] transition-colors cursor-pointer"
+                title="Copy command"
+                aria-label="Copy command"
+              >
+                {copied ? (
+                  <Check className="w-3.5 h-3.5 text-[#03B000]" />
+                ) : (
+                  <Copy className="w-3.5 h-3.5" />
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Clean Action Links */}
+          <div className="flex flex-wrap items-center gap-3 pt-1 font-mono text-xs">
             <a
               href="#certifications"
-              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-5 py-2.5 rounded-xl shadow-lg shadow-indigo-600/20 transition-all hover:translate-y-[-1px]"
+              className="inline-flex items-center gap-2 bg-[#ffffff] hover:bg-[#e4e2e2] text-[#131111] font-semibold px-4 py-2 rounded-[3px] transition-colors"
             >
-              <Award className="w-4 h-4 text-indigo-200" />
-              <span>View Certifications</span>
-              <ArrowRight className="w-4 h-4 text-indigo-300" />
+              <span>Certifications [3]</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </a>
 
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white font-medium px-5 py-2.5 rounded-xl border border-zinc-700/60 transition-all hover:translate-y-[-1px]"
+              className="inline-flex items-center gap-2 bg-[#1a1919] hover:bg-[#222020] text-white border border-[#3b3939] px-4 py-2 rounded-[3px] transition-colors"
             >
-              <span>Explore Projects</span>
+              <span>Projects</span>
+            </a>
+
+            <a
+              href="/finance/dcf"
+              className="inline-flex items-center gap-2 bg-[#1a1919] hover:bg-[#222020] text-[#cfcecd] border border-[#3b3939] px-4 py-2 rounded-[3px] transition-colors"
+            >
+              <Terminal className="w-3.5 h-3.5 text-[#8e8b8b]" />
+              <span>DCF Model</span>
             </a>
 
             {resumeUrl && (
@@ -65,114 +131,92 @@ const HeroSection = ({ resumeUrl = '/resume.pdf' }: HeroSectionProps) => {
                 href={resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-zinc-900/60 hover:bg-zinc-800/80 text-zinc-300 hover:text-white font-medium px-4 py-2.5 rounded-xl border border-zinc-800 transition-all"
+                className="inline-flex items-center gap-1.5 text-[#8e8b8b] hover:text-white px-3 py-2 transition-colors"
               >
-                <FileText className="w-4 h-4 text-zinc-400" />
-                <span>Resume</span>
-                <ExternalLink className="w-3.5 h-3.5 text-zinc-500" />
+                <FileText className="w-3.5 h-3.5" />
+                <span>Resume.pdf</span>
               </a>
             )}
           </div>
 
-          {/* Social Links Row */}
-          <div className="flex items-center gap-4 pt-4 text-zinc-400 text-sm">
-            <span className="text-zinc-500 text-xs font-semibold uppercase tracking-wider">Connect:</span>
-            <a
-              href={CREDLY_PROFILE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-zinc-300 hover:text-amber-400 transition-colors"
-            >
-              <Award className="w-4 h-4 text-amber-400" />
-              <span>Credly</span>
+          {/* Connect Bar */}
+          <div className="flex items-center space-x-3 pt-2 font-mono text-xs text-[#8e8b8b]">
+            <span className="text-[#656363]">links:</span>
+            <a href={CREDLY_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+              credly
             </a>
-            <span className="text-zinc-700">•</span>
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-zinc-300 hover:text-white transition-colors"
-            >
-              <BsGithub className="w-4 h-4" />
-              <span>GitHub</span>
+            <span className="text-[#3b3939]">/</span>
+            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+              github
             </a>
-            <span className="text-zinc-700">•</span>
-            <a
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-zinc-300 hover:text-blue-400 transition-colors"
-            >
-              <BsLinkedin className="w-4 h-4" />
-              <span>LinkedIn</span>
+            <span className="text-[#3b3939]">/</span>
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+              linkedin
             </a>
-            <span className="text-zinc-700">•</span>
-            <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              className="inline-flex items-center gap-1.5 text-zinc-300 hover:text-indigo-400 transition-colors"
-            >
-              <Mail className="w-4 h-4" />
-              <span>Email</span>
+            <span className="text-[#3b3939]">/</span>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-white">
+              email
             </a>
           </div>
         </div>
 
-        {/* Right Column: Profile Card & Quick Stats */}
-        <div className="lg:col-span-4 flex flex-col items-center">
-          <div className="w-full max-w-sm rounded-2xl glass-panel p-6 border border-zinc-800/80 shadow-2xl relative">
-            {/* Ambient Corner Accent */}
-            <div className="absolute top-0 right-0 w-28 h-28 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none" />
+        {/* Right Column: Engineering Spec Sheet Card */}
+        <div className="lg:col-span-5">
+          <div className="border border-[#2e2c2c] bg-[#171616] rounded-[4px] p-5 space-y-4">
+            {/* Figure Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-[#2e2c2c] font-mono text-xs">
+              <span className="text-[#8e8b8b]">
+                <strong className="text-white font-semibold">Fig 1.</strong> Specification
+              </span>
+              <span className="text-[11px] text-[#656363]">[AI/ML_CORE]</span>
+            </div>
 
-            <div className="relative w-32 h-32 mx-auto mb-4 rounded-2xl overflow-hidden ring-4 ring-zinc-800/80 shadow-xl">
+            {/* Profile Photo */}
+            <div className="relative w-full h-44 rounded-[3px] overflow-hidden border border-[#2e2c2c] bg-[#131111]">
               <Image
                 src="/headshot.jpeg"
                 alt="Brandon Gill"
                 fill
-                sizes="128px"
-                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 400px"
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-300"
                 priority
               />
             </div>
 
-            <div className="text-center space-y-1 mb-5">
-              <h2 className="text-lg font-bold text-white">Brandon Gill</h2>
-              <p className="text-xs text-indigo-400 font-medium">
-                M.S. in Artificial Intelligence
-              </p>
-              <p className="text-xs text-zinc-400">Oregon State University</p>
-            </div>
-
-            <div className="space-y-2.5 pt-3 border-t border-zinc-800/80 text-xs">
-              <div className="flex items-center justify-between text-zinc-300">
-                <span className="text-zinc-500">Focus:</span>
-                <span className="font-medium text-zinc-200">ML & Agentic Systems</span>
+            {/* Technical Ledger Metadata */}
+            <div className="divide-y divide-[#2e2c2c] font-mono text-xs">
+              <div className="py-2 flex justify-between">
+                <span className="text-[#8e8b8b]">DEGREE</span>
+                <span className="text-white font-medium">M.S. Computer Science (AI)</span>
               </div>
-              <div className="flex items-center justify-between text-zinc-300">
-                <span className="text-zinc-500">Degree:</span>
-                <span className="font-medium text-zinc-200">M.S. Computer Science</span>
+              <div className="py-2 flex justify-between">
+                <span className="text-[#8e8b8b]">INSTITUTION</span>
+                <span className="text-[#cfcecd]">Oregon State University</span>
               </div>
-              <div className="flex items-center justify-between text-zinc-300">
-                <span className="text-zinc-500">Verified Credentials:</span>
-                <span className="font-semibold text-amber-400 inline-flex items-center gap-1">
-                  <Award className="w-3.5 h-3.5" /> 3 Badges
-                </span>
+              <div className="py-2 flex justify-between">
+                <span className="text-[#8e8b8b]">FOCUS</span>
+                <span className="text-[#cfcecd]">Autonomous Systems &amp; LLMs</span>
               </div>
-              <div className="flex items-center justify-between text-zinc-300">
-                <span className="text-zinc-500">Location:</span>
-                <span className="font-medium text-zinc-200">Corvallis, OR</span>
+              <div className="py-2 flex justify-between">
+                <span className="text-[#8e8b8b]">CREDENTIALS</span>
+                <span className="text-white">3 Verified (AWS &amp; GCP)</span>
+              </div>
+              <div className="py-2 flex justify-between">
+                <span className="text-[#8e8b8b]">LOCATION</span>
+                <span className="text-[#cfcecd]">Corvallis, Oregon</span>
               </div>
             </div>
 
-            <div className="mt-5 pt-3 border-t border-zinc-800/80">
+            <div className="pt-2 border-t border-[#2e2c2c]">
               <a
                 href={CREDLY_PROFILE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-medium text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-2 text-xs font-mono text-[#cfcecd] hover:text-white bg-[#1a1919] hover:bg-[#222020] border border-[#2e2c2c] rounded-[3px] transition-colors"
               >
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>Verify Credly Profile</span>
-                <ExternalLink className="w-3 h-3 text-amber-400/70" />
+                <Award className="w-3.5 h-3.5 text-[#8e8b8b]" />
+                <span>Verify on Credly [3 Badges]</span>
+                <ExternalLink className="w-3 h-3 text-[#656363]" />
               </a>
             </div>
           </div>
