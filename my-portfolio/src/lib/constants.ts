@@ -120,6 +120,15 @@ export const DEFAULT_SKILL_CATEGORIES = [
 
 export const DEFAULT_PROJECTS: SanityProject[] = [
   {
+    _id: 'proj-earnings-alpha',
+    title: 'Real-Time Earnings Sentiment & Market Alpha Engine',
+    description: 'Institutional pipeline extracting structured intelligence from corporate earnings calls, running FinBERT tone analysis across unscripted Q&A vs prepared remarks, and modeling Post-Earnings Announcement Drift (PEAD).',
+    technologies: ['FastAPI', 'FinBERT (NLP)', 'PyTorch', 'Pandas', 'Next.js 15', 'TypeScript'],
+    githubUrl: 'https://github.com/BGill8',
+    liveUrl: '/finance/earnings',
+    orderRank: 5,
+  },
+  {
     _id: 'proj-ai-agent',
     title: 'Autonomous Multi-Agent AI Workflow Engine',
     description: 'An advanced orchestrator for cooperative autonomous AI agents executing multi-step reasoning, tool usage, memory management, and structured synthesis across heterogeneous LLM providers.',

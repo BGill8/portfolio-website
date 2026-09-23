@@ -1,0 +1,11 @@
+fastapi>=0.110.0
+uvicorn>=0.28.0
+pydantic>=2.6.0
+pandas>=2.2.0
+numpy>=1.26.0
+yfinance>=0.2.38
+torch>=2.2.0
+httpx>=0.27.0
+python-multipart>=0.0.9
+requests>=2.31.0
+scipy>=1.12.0

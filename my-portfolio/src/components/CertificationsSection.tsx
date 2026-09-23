@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Award, CheckCircle2, Calendar, ExternalLink, Sparkles, ShieldCheck } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { urlFor } from '@/lib/sanity';
 import { SanityCertification } from '@/lib/types';
 import { CREDLY_PROFILE_URL, DEFAULT_CERTIFICATIONS } from '@/lib/constants';
@@ -9,25 +9,24 @@ interface CertificationsSectionProps {
 }
 
 const CertificationsSection = ({ certificationsData }: CertificationsSectionProps) => {
-  // Use CMS data if provided and non-empty, otherwise use comprehensive default Credly certifications
   const certifications = (certificationsData && certificationsData.length > 0)
     ? certificationsData
     : DEFAULT_CERTIFICATIONS;
 
   return (
-    <section className="py-16 md:py-24 border-b border-zinc-800/60" id="certifications">
+    <section className="py-14 md:py-20 border-b border-[#2e2c2c]" id="certifications">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20">
-            <Award className="w-3.5 h-3.5" />
-            <span>Verified Credentials</span>
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#8e8b8b]">
+            <span className="text-white">[*]</span>
+            <span>INDUSTRY_CREDENTIALS [3_VERIFIED]</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Certifications & Badges
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">
+            Certifications &amp; Badges
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base max-w-xl">
-            Industry-recognized machine learning, artificial intelligence, and cloud certifications earned and verified via Credly.
+          <p className="text-[#8e8b8b] text-xs sm:text-sm max-w-xl font-sans">
+            Verified machine learning, artificial intelligence, and cloud engineering certifications issued via Credly.
           </p>
         </div>
 
@@ -35,24 +34,21 @@ const CertificationsSection = ({ certificationsData }: CertificationsSectionProp
           href={CREDLY_PROFILE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 self-start md:self-auto px-4 py-2 rounded-xl text-xs font-semibold text-amber-300 bg-zinc-900 hover:bg-zinc-800 border border-amber-500/30 hover:border-amber-500/60 transition-all shadow-sm group"
+          className="inline-flex items-center gap-1.5 self-start sm:self-auto px-3 py-1.5 rounded-[3px] text-xs font-mono text-[#cfcecd] hover:text-white bg-[#1a1919] hover:bg-[#222020] border border-[#3b3939] transition-colors"
         >
-          <Sparkles className="w-3.5 h-3.5 text-amber-400 group-hover:rotate-12 transition-transform" />
-          <span>View All on Credly Profile</span>
-          <ExternalLink className="w-3.5 h-3.5 text-amber-400/80" />
+          <span>Credly Profile [All]</span>
+          <ExternalLink className="w-3 h-3 text-[#8e8b8b]" />
         </a>
       </div>
 
       {/* Certifications Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {certifications.map((cert) => {
-          // Resolve image source: either Sanity image asset or local badge PNG fallback
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {certifications.map((cert, index) => {
           let imageSrc = cert.localBadgeUrl || '/badges/aws-ml-engineer.png';
           if (cert.badgeImage && cert.badgeImage.asset) {
             try {
               imageSrc = urlFor(cert.badgeImage).url();
             } catch {
-              // Fallback to local image
               if (cert.localBadgeUrl) imageSrc = cert.localBadgeUrl;
             }
           }
@@ -62,34 +58,38 @@ const CertificationsSection = ({ certificationsData }: CertificationsSectionProp
           return (
             <div
               key={cert._id || cert.title}
-              className="glass-panel-glow rounded-2xl p-6 flex flex-col justify-between group"
+              className="border border-[#2e2c2c] bg-[#171616] hover:bg-[#1c1b1b] hover:border-[#3b3939] p-5 rounded-[4px] transition-colors flex flex-col justify-between"
             >
               <div>
-                {/* Top Badge Row */}
+                {/* Header Row */}
                 <div className="flex items-start gap-4 mb-4">
                   {/* Badge Logo Container */}
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 bg-zinc-900/90 rounded-2xl p-2.5 border border-zinc-700/60 flex items-center justify-center group-hover:border-indigo-500/50 transition-all">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-[#131111] rounded-[3px] p-2 border border-[#2e2c2c] flex items-center justify-center">
                     <Image
                       src={imageSrc}
-                      alt={`${cert.title} badge logo`}
-                      width={84}
-                      height={84}
-                      className="object-contain w-full h-full transform group-hover:scale-105 transition-transform duration-300"
+                      alt={`${cert.title} badge`}
+                      width={68}
+                      height={68}
+                      className="object-contain w-full h-full"
                     />
                   </div>
 
-                  {/* Title & Issuer */}
-                  <div className="flex-1 min-w-0">
-                    <div className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded-md mb-1.5">
-                      <ShieldCheck className="w-3 h-3" />
-                      <span>Verified</span>
+                  {/* Title & Metadata */}
+                  <div className="flex-1 min-w-0 font-mono">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-[10px] text-[#03B000] bg-[#03B000]/10 border border-[#03B000]/30 px-1.5 py-0.5 rounded-[2px]">
+                        VERIFIED
+                      </span>
+                      <span className="text-[10px] text-[#656363]">
+                        #{String(index + 1).padStart(2, '0')}
+                      </span>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-bold text-white leading-snug group-hover:text-indigo-300 transition-colors line-clamp-2">
+                    <h3 className="text-sm sm:text-base font-semibold text-white font-sans leading-snug line-clamp-2">
                       {cert.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm font-medium text-zinc-300 mt-1">
+                    <p className="text-xs text-[#8e8b8b] mt-0.5">
                       {cert.issuer}
                     </p>
                   </div>
@@ -97,90 +97,46 @@ const CertificationsSection = ({ certificationsData }: CertificationsSectionProp
 
                 {/* Dates & Validity */}
                 {(cert.issueDate || cert.expiryDate) && (
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-400 mb-3.5 pt-2 border-t border-zinc-800/60">
+                  <div className="flex flex-wrap items-center gap-x-4 text-xs font-mono text-[#8e8b8b] pt-3 pb-2 border-t border-[#2e2c2c]">
                     {cert.issueDate && (
-                      <span className="inline-flex items-center gap-1 text-zinc-400">
-                        <Calendar className="w-3 h-3 text-zinc-500" />
-                        <span>Issued: <strong className="text-zinc-300 font-medium">{cert.issueDate}</strong></span>
-                      </span>
+                      <span>ISSUED: {cert.issueDate}</span>
                     )}
                     {cert.expiryDate && (
-                      <span className="text-zinc-500">
-                        Expires: <strong className="text-zinc-400 font-medium">{cert.expiryDate}</strong>
-                      </span>
+                      <span className="text-[#656363]">EXPIRES: {cert.expiryDate}</span>
                     )}
                   </div>
                 )}
 
-                {/* Description */}
-                {cert.description && (
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-4">
-                    {cert.description}
-                  </p>
-                )}
-
-                {/* Skills Chips */}
+                {/* Skills/Domains */}
                 {cert.skills && cert.skills.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 mb-5">
+                  <div className="flex flex-wrap gap-1.5 mt-2">
                     {cert.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="text-[11px] font-medium text-zinc-300 bg-zinc-800/80 border border-zinc-700/50 px-2 py-0.5 rounded-md"
+                        className="text-[10px] font-mono text-[#8e8b8b] bg-[#131111] border border-[#2e2c2c] px-1.5 py-0.5 rounded-[2px]"
                       >
-                        {skill}
+                        [{skill}]
                       </span>
                     ))}
                   </div>
                 )}
               </div>
 
-              {/* Bottom Action: Credly Link */}
-              <div className="pt-4 border-t border-zinc-800/60 flex items-center justify-between">
-                <span className="text-[11px] text-zinc-500 flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  Credly Authenticated
-                </span>
-
+              {/* Action Link */}
+              <div className="mt-4 pt-3 border-t border-[#2e2c2c]">
                 <a
                   href={credlyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 px-3.5 py-1.5 rounded-lg shadow-sm shadow-indigo-600/20 transition-all hover:translate-x-0.5"
+                  className="inline-flex items-center gap-1.5 text-xs font-mono text-[#cfcecd] hover:text-white transition-colors"
                 >
-                  <span>Verify on Credly</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Verify Credly Badge</span>
+                  <ExternalLink className="w-3 h-3 text-[#8e8b8b]" />
                 </a>
               </div>
             </div>
           );
         })}
-      </div>
-
-      {/* Credly Profile Highlight Banner */}
-      <div className="mt-8 p-6 rounded-2xl glass-panel border border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-4 text-left">
-          <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
-            <Award className="w-6 h-6 text-amber-400" />
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-zinc-100">
-              Want to see all verified certifications and skills?
-            </h4>
-            <p className="text-xs text-zinc-400">
-              View official credentials, issuing metadata, and skill taxonomy on Credly.
-            </p>
-          </div>
-        </div>
-
-        <a
-          href={CREDLY_PROFILE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold text-zinc-950 bg-amber-400 hover:bg-amber-300 transition-colors flex-shrink-0"
-        >
-          <span>Open Credly Badges</span>
-          <ExternalLink className="w-3.5 h-3.5" />
-        </a>
       </div>
     </section>
   );

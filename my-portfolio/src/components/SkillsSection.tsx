@@ -1,6 +1,4 @@
-import Image from 'next/image';
-import { Cpu, Layers } from 'lucide-react';
-import { urlFor } from '@/lib/sanity';
+import { useMemo } from 'react';
 import { SanitySkill } from '@/lib/types';
 import { DEFAULT_SKILL_CATEGORIES } from '@/lib/constants';
 
@@ -9,89 +7,59 @@ interface SkillsSectionProps {
 }
 
 const SkillsSection = ({ skillsData }: SkillsSectionProps) => {
-  const hasCmsSkills = skillsData && skillsData.length > 0;
-
+  const categories = useMemo(() => {
+    if (!skillsData || skillsData.length === 0) {
+      return DEFAULT_SKILL_CATEGORIES;
+    }
+    const map = new Map<string, string[]>();
+    for (const s of skillsData) {
+      const catName = s.category || 'Core';
+      const existing = map.get(catName) || [];
+      existing.push(s.name);
+      map.set(catName, existing);
+    }
+    return Array.from(map.entries()).map(([category, skills]) => ({ category, skills }));
+  }, [skillsData]);
   return (
-    <section className="py-16 md:py-24 border-b border-zinc-800/60" id="skills">
-      <div className="space-y-2 mb-12">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-purple-400 bg-purple-500/10 border border-purple-500/20">
-          <Cpu className="w-3.5 h-3.5" />
-          <span>Technical Proficiencies</span>
+    <section className="py-14 md:py-20 border-b border-[#2e2c2c]" id="skills">
+      <div className="space-y-2 mb-10">
+        <div className="inline-flex items-center gap-2 text-xs font-mono text-[#8e8b8b]">
+          <span className="text-white">[*]</span>
+          <span>COMPETENCY_MATRIX // TOOLING</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-          Skills & Technologies
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">
+          Skills &amp; Technologies
         </h2>
-        <p className="text-zinc-400 text-sm sm:text-base max-w-xl">
-          Core competencies spanning machine learning research, distributed AI systems, and cloud infrastructure.
+        <p className="text-[#8e8b8b] text-xs sm:text-sm max-w-xl font-sans">
+          Core proficiencies spanning machine learning engineering, distributed systems, and cloud infrastructure.
         </p>
       </div>
 
-      {/* Categorized Skills Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {DEFAULT_SKILL_CATEGORIES.map((cat) => (
+      {/* Grid of Skill Categories */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {categories.map((cat) => (
           <div
             key={cat.category}
-            className="glass-panel rounded-2xl p-6 border border-zinc-800"
+            className="border border-[#2e2c2c] bg-[#171616] p-5 rounded-[4px] space-y-3"
           >
-            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-zinc-800/80">
-              <Layers className="w-4 h-4 text-indigo-400" />
-              <h3 className="text-base font-semibold text-zinc-100">
-                {cat.category}
-              </h3>
+            <div className="flex items-center justify-between pb-2 border-b border-[#2e2c2c] font-mono text-xs">
+              <span className="text-white font-semibold">{cat.category}</span>
+              <span className="text-[10px] text-[#656363]">[{cat.skills.length}_MODULES]</span>
             </div>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5 pt-1">
               {cat.skills.map((skill) => (
                 <span
                   key={skill}
-                  className="text-xs font-medium text-zinc-300 bg-zinc-900/90 hover:bg-zinc-800 hover:text-white border border-zinc-800 hover:border-zinc-700 px-3 py-1.5 rounded-lg transition-colors cursor-default"
+                  className="text-xs font-mono text-[#cfcecd] hover:text-white bg-[#131111] hover:bg-[#1f1d1d] border border-[#2e2c2c] hover:border-[#3b3939] px-2.5 py-1 rounded-[2px] transition-colors cursor-default"
                 >
-                  {skill}
+                  [{skill}]
                 </span>
               ))}
             </div>
           </div>
         ))}
       </div>
-
-      {/* If Sanity CMS has custom individual skill icons */}
-      {hasCmsSkills && (
-        <div className="mt-8 pt-6 border-t border-zinc-800/60">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-4">
-            Additional Tools & Libraries
-          </h4>
-          <div className="flex flex-wrap items-center gap-4">
-            {skillsData.map((skill) => {
-              let iconUrl: string | null = null;
-              if (skill.icon && skill.icon.asset) {
-                try {
-                  iconUrl = urlFor(skill.icon).url();
-                } catch {
-                  iconUrl = null;
-                }
-              }
-
-              return (
-                <div
-                  key={skill._id || skill.name}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-300"
-                >
-                  {iconUrl && (
-                    <Image
-                      src={iconUrl}
-                      alt={skill.name}
-                      width={16}
-                      height={16}
-                      className="w-4 h-4 object-contain"
-                    />
-                  )}
-                  <span>{skill.name}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
     </section>
   );
 };
