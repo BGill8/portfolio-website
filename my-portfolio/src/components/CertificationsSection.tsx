@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import { ExternalLink } from 'lucide-react';
-import { urlFor } from '@/lib/sanity';
-import { SanityCertification } from '@/lib/types';
+import { Certification } from '@/lib/types';
 import { CREDLY_PROFILE_URL, DEFAULT_CERTIFICATIONS } from '@/lib/constants';
 
 interface CertificationsSectionProps {
-  certificationsData?: SanityCertification[];
+  certificationsData?: Certification[];
 }
 
 const CertificationsSection = ({ certificationsData }: CertificationsSectionProps) => {
@@ -44,14 +43,7 @@ const CertificationsSection = ({ certificationsData }: CertificationsSectionProp
       {/* Certifications Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {certifications.map((cert, index) => {
-          let imageSrc = cert.localBadgeUrl || '/badges/aws-ml-engineer.png';
-          if (cert.badgeImage && cert.badgeImage.asset) {
-            try {
-              imageSrc = urlFor(cert.badgeImage).url();
-            } catch {
-              if (cert.localBadgeUrl) imageSrc = cert.localBadgeUrl;
-            }
-          }
+          const imageSrc = cert.localBadgeUrl || '/badges/aws-ml-engineer.png';
 
           const credlyUrl = cert.credlyUrl || CREDLY_PROFILE_URL;
 

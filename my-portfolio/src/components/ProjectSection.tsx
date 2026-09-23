@@ -1,10 +1,10 @@
 import { BsGithub } from 'react-icons/bs';
 import { ArrowUpRight } from 'lucide-react';
-import { SanityProject } from '@/lib/types';
+import { Project } from '@/lib/types';
 import { DEFAULT_PROJECTS } from '@/lib/constants';
 
 interface ProjectSectionProps {
-  projectsData?: SanityProject[];
+  projectsData?: Project[];
 }
 
 const ProjectSection = ({ projectsData }: ProjectSectionProps) => {

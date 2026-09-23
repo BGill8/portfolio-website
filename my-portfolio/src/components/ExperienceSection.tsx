@@ -1,8 +1,8 @@
-import { SanityExperience } from '@/lib/types';
+import { Experience } from '@/lib/types';
 import { DEFAULT_EXPERIENCES } from '@/lib/constants';
 
 interface ExperienceSectionProps {
-  experienceData?: SanityExperience[];
+  experienceData?: Experience[];
 }
 
 const ExperienceSection = ({ experienceData }: ExperienceSectionProps) => {

@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { SanitySkill } from '@/lib/types';
+import { Skill } from '@/lib/types';
 import { DEFAULT_SKILL_CATEGORIES } from '@/lib/constants';
 
 interface SkillsSectionProps {
-  skillsData?: SanitySkill[];
+  skillsData?: Skill[];
 }
 
 const SkillsSection = ({ skillsData }: SkillsSectionProps) => {

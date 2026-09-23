@@ -1,4 +1,4 @@
-import { SanityAbout, SanityCertification, SanityExperience, SanityProject } from './types';
+import { About, Certification, Experience, Project } from './types';
 
 export const CREDLY_PROFILE_URL = 'https://www.credly.com/users/brandonkngill/badges';
 export const GITHUB_URL = 'https://github.com/BGill8';
@@ -6,14 +6,14 @@ export const LINKEDIN_URL = 'https://linkedin.com/in/brandonkngill';
 export const INSTAGRAM_URL = 'https://instagram.com/brandonkngill';
 export const CONTACT_EMAIL = 'brandongill9432@gmail.com';
 
-export const DEFAULT_ABOUT: SanityAbout = {
-  headline: "Hi, I'm Brandon Gill",
+export const DEFAULT_ABOUT: About = {
+  headline: "Brandon Gill",
   subheadline: "M.S. in Computer Science (Artificial Intelligence) at Oregon State University",
-  bio: "Graduate student in Computer Science at Oregon State University specializing in Artificial Intelligence and Machine Learning. Experienced in building production-ready machine learning pipelines, generative AI solutions, autonomous agents, and scalable web architectures. Passionate about solving high-impact problems through intelligent computing.",
+  bio: "Graduate student at Oregon State University specializing in Machine Learning and Artificial Intelligence. Building scalable autonomous agent workflows, distributed LLM orchestration pipelines, and cloud-native infrastructure.",
   resumeUrl: "/resume.pdf",
 };
 
-export const DEFAULT_CERTIFICATIONS: SanityCertification[] = [
+export const DEFAULT_CERTIFICATIONS: Certification[] = [
   {
     _id: 'cert-aws-mle',
     title: 'AWS Certified Machine Learning Engineer – Associate',
@@ -52,48 +52,110 @@ export const DEFAULT_CERTIFICATIONS: SanityCertification[] = [
   },
 ];
 
-export const DEFAULT_EXPERIENCES: SanityExperience[] = [
+export const DEFAULT_EXPERIENCES: Experience[] = [
   {
-    _id: 'exp-osu-grad',
-    title: 'Graduate Student & AI Researcher',
-    organization: 'Oregon State University',
+    _id: 'exp-seed-ai',
+    title: 'Artificial Intelligence Engineer Intern',
+    organization: 'Seed-AI — Oregon State University',
     location: 'Corvallis, OR',
-    dates: '2025 - Present',
+    dates: 'Feb 2026 – Present',
     description: [
-      'Pursuing Master of Science in Computer Science with a concentration in Artificial Intelligence.',
-      'Conducting research in machine learning architectures, agentic AI frameworks, and distributed intelligent systems.',
-      'Applying modern deep learning and cloud infrastructure to practical problems in computer science.',
+      'Architected a Human-in-the-Loop (HITL) web application using FastAPI for an agricultural sorting pipeline, enabling domain experts to review automated seed trays, identify misclassifications, and seamlessly append corrected labels to active training datasets.',
+      'Integrated foundation vision models (YOLO, SAM 2.1) with a modular database retrieval engine designed with decoupled adapters to fetch regulatory restrictions and physical identification metrics for verified seed species.',
     ],
-    skills: ['Artificial Intelligence', 'PyTorch', 'Machine Learning', 'Research', 'Python'],
-    orderRank: 10,
+    skills: ['FastAPI', 'Python', 'YOLO', 'SAM 2.1', 'Computer Vision', 'HITL', 'MLOps'],
+    orderRank: 1,
   },
   {
-    _id: 'exp-osu-undergrad',
-    title: 'B.S. in Computer Science (AI Option)',
+    _id: 'exp-osu-research',
+    title: 'HPC & AI Student Researcher',
+    organization: 'Oregon State University – College of Engineering',
+    location: 'Corvallis, OR',
+    dates: 'Sept 2025 – June 2026',
+    description: [
+      'Built an automated pipeline to translate proprietary HPC kernels (CUDA) to modern parallel standards (OpenMP) using open-weight LLMs using zero shot prompting.',
+      'Engineered an agentic feedback loop that parses compiler error logs to autonomously prompt the LLM for repairs, reducing manual debugging time by approx. 60%.',
+      'Validated translation integrity against the HeCBench suite, implementing automated testing for semantic correctness and syntactic similarity.',
+    ],
+    skills: ['CUDA', 'OpenMP', 'LLMs', 'PyTorch', 'C/C++', 'Bash', 'Agentic Systems', 'HPC'],
+    orderRank: 2,
+  },
+  {
+    _id: 'exp-beaverhacks',
+    title: 'Full Stack Developer',
+    organization: 'Beaverhacks',
+    location: 'Corvallis, OR',
+    dates: 'May 2025 – Present',
+    description: [
+      'Optimized API endpoints and database queries within a 5-person Agile team, handling a 10x traffic spike with sub-200ms latency.',
+      'Developed dynamic, role-based dashboards using Next.js and TypeScript, reducing administrative project management time by 50% through automated workflows.',
+      "Engineered a full-stack web portal for Oregon State's BeaverHacks program, utilizing Next.js, React, and PostgreSQL for submissions and scoring.",
+    ],
+    skills: ['Next.js', 'TypeScript', 'React', 'PostgreSQL', 'Tailwind CSS', 'Agile'],
+    orderRank: 3,
+  },
+  {
+    _id: 'exp-eco-rep',
+    title: 'Eco Representative',
     organization: 'Oregon State University',
     location: 'Corvallis, OR',
-    dates: '2022 - 2025',
+    dates: 'Oct 2024 – June 2025',
     description: [
-      'Graduated with honors in Computer Science, specializing in Artificial Intelligence and Algorithms.',
-      'Built end-to-end full-stack systems, machine learning models, and participated in collaborative software engineering projects.',
+      'Served as the primary sustainability leader for an on-campus community of 200+ residents, driving engagement through educational outreach and program management as part of a university-wide team that achieved over 14,000 student interactions.',
+      'Established a tennis ball recycling program on campus that saved over 110 pounds of tennis balls from landfills.',
     ],
-    skills: ['Computer Science', 'Algorithms', 'Data Structures', 'Full-Stack Development'],
-    orderRank: 20,
+    skills: ['Leadership', 'Program Management', 'Community Outreach', 'Sustainability'],
+    orderRank: 4,
+  },
+  {
+    _id: 'exp-tennis-coach',
+    title: 'Tennis Coach',
+    organization: 'Eugene Swim and Tennis Club',
+    location: 'Eugene, OR',
+    dates: 'June 2023 – Sept 2023',
+    description: [
+      'Instructed youth athletes aged 4-17 in fundamental tennis mechanics, on-court mentality, and physical fitness in a dynamic summer camp environment.',
+    ],
+    skills: ['Coaching', 'Athletics Instruction', 'Mentorship', 'Communication'],
+    orderRank: 5,
   },
 ];
 
 export const DEFAULT_SKILL_CATEGORIES = [
   {
-    category: 'AI & Machine Learning',
+    category: 'Core',
+    skills: [
+      'Python',
+      'TypeScript',
+      'C++',
+      'JavaScript',
+      'Next.js',
+      'React',
+      'Git',
+      'SQL',
+      'NumPy',
+      'Prisma ORM',
+      'HTML',
+      'CSS',
+      'Tailwind CSS',
+      'Matplotlib',
+      'Figma',
+      'R',
+      'MongoDB',
+    ],
+  },
+  {
+    category: 'AI / Machine Learning & HPC',
     skills: [
       'PyTorch',
-      'TensorFlow',
-      'LLMs & Prompt Engineering',
-      'Agentic Systems',
-      'Retrieval-Augmented Generation (RAG)',
-      'Computer Vision',
-      'MLOps & Model Deployment',
-      'Hugging Face',
+      'Computer Vision (SAM, YOLO, U-Net)',
+      'Transformers',
+      'LLMs',
+      'OpenMP',
+      'CUDA',
+      'Slurm',
+      'FastAPI',
+      'Albumentations',
     ],
   },
   {
@@ -103,53 +165,77 @@ export const DEFAULT_SKILL_CATEGORIES = [
       'Google Cloud Platform (GCP)',
       'AWS SageMaker',
       'Google Vertex AI',
-      'Docker & Containerization',
+      'Docker',
       'CI/CD Pipelines',
       'Linux / Bash',
     ],
   },
   {
-    category: 'Languages & Core',
-    skills: ['Python', 'TypeScript', 'JavaScript', 'C / C++', 'SQL (PostgreSQL)', 'HTML5 & Modern CSS'],
-  },
-  {
-    category: 'Frameworks & Web Engineering',
-    skills: ['Next.js 15', 'React 19', 'Node.js', 'Tailwind CSS', 'RESTful APIs', 'Sanity CMS', 'Git & GitHub'],
+    category: 'Full Stack & Database',
+    skills: [
+      'Next.js 15',
+      'React 19',
+      'Node.js',
+      'Express.js',
+      'PostgreSQL',
+      'MongoDB',
+      'Prisma ORM',
+      'RESTful APIs',
+    ],
   },
 ];
 
-export const DEFAULT_PROJECTS: SanityProject[] = [
+export const DEFAULT_PROJECTS: Project[] = [
   {
-    _id: 'proj-earnings-alpha',
-    title: 'Real-Time Earnings Sentiment & Market Alpha Engine',
-    description: 'Institutional pipeline extracting structured intelligence from corporate earnings calls, running FinBERT tone analysis across unscripted Q&A vs prepared remarks, and modeling Post-Earnings Announcement Drift (PEAD).',
-    technologies: ['FastAPI', 'FinBERT (NLP)', 'PyTorch', 'Pandas', 'Next.js 15', 'TypeScript'],
+    _id: 'proj-beaverhacks-gallery',
+    title: 'Beaverhacks Project Gallery',
+    description: 'Project gallery for present and past hackathons for beaverhacks - the hackathon club at Oregon State University.',
+    technologies: ['TypeScript', 'React', 'TailwindCSS', 'Next.js'],
+    githubUrl: 'https://github.com/OregonStateHackathonClub/judge',
+    liveUrl: 'https://judge-phi.vercel.app/2026',
+    orderRank: 1,
+  },
+  {
+    _id: 'proj-hpc-migration',
+    title: 'LLM-Driven HPC Migration Pipeline (Capstone)',
+    description: "This project focused on modernizing High-Performance Computing code by building a pipeline that leverages open-source LLMs to translate legacy CUDA kernels into OpenMP. The key innovation was the implementation of an 'agentic feedback loop'—rather than a single-pass generation, the system attempts compilation, captures errors, and feeds them back to the LLM for autonomous self-correction. Results were validated against the HeCBench suite to ensure mathematical accuracy across diverse scientific domains.",
+    technologies: ['Prompt Engineering', 'LLM Fine-Tuning', 'Bash', 'CUDA to OpenMP Translation', 'LLM-Evaluation'],
+    githubUrl: 'https://github.com/ANSWER-OSU/LLM-Code-Migration',
+    orderRank: 2,
+  },
+  {
+    _id: 'proj-nuclei-segmentation',
+    title: 'Automatic Cell Nuclei Instance Segmentation',
+    description: 'Engineered a custom multi-task U-Net architecture from scratch to perform automated instance segmentation, simultaneously predicting semantic footprints and spatial distance maps across 670 microscopy images and 20,000+ individual nucleus masks. Combined a compound loss function (BCE, Dice, MSE) with Marker-Controlled Watershed post-processing to separate dense overlapping cellular structures, placing in the 72nd percentile of the 2018 Data Science Bowl.',
+    technologies: ['Python', 'PyTorch', 'Multi-Task Learning', 'U-Net', 'Computer Vision'],
     githubUrl: 'https://github.com/BGill8',
-    liveUrl: '/finance/earnings',
+    orderRank: 3,
+  },
+  {
+    _id: 'proj-beaver-notes',
+    title: 'Beaver Notes - AI Notes Converter',
+    description: "For my teams' submission to BeaverHacks 2025, we created Beaver Notes! Beaver Notes is an AI-enhanced note-taking tool that allows the student to focus on learning the material, rather than scrambling to write everything that the professor spoke about.",
+    technologies: ['Google Gemini API', 'RestAPI', 'JavaScript', 'HTML', 'CSS', 'MongoDB'],
+    githubUrl: 'https://github.com/BGill8/beavernotes-ai-notetaking',
+    liveUrl: 'https://www.youtube.com/watch?v=O1jytnXywMQ&t=2s',
+    orderRank: 4,
+  },
+  {
+    _id: 'proj-multiplayer-mafia',
+    title: 'Multiplayer Mafia Web Game',
+    description: 'As part of a four-person team, I engineered a real-time multiplayer version of the party game "Mafia" using NodeJS, Handlebars, and Socket.io. The application implements a turn-based state machine for special roles like the Mafia, Doctor, and Sheriff, and features a live chat and voting system for all players to deduce and eliminate the hidden Mafia.',
+    technologies: ['JavaScript', 'Handlebars', 'CSS', 'Node.js', 'Socket.io'],
+    githubUrl: 'https://github.com/osu-cs290-f24/final-project-the-mafia',
     orderRank: 5,
   },
   {
-    _id: 'proj-ai-agent',
-    title: 'Autonomous Multi-Agent AI Workflow Engine',
-    description: 'An advanced orchestrator for cooperative autonomous AI agents executing multi-step reasoning, tool usage, memory management, and structured synthesis across heterogeneous LLM providers.',
-    technologies: ['Python', 'PyTorch', 'LangChain', 'FastAPI', 'AWS'],
-    githubUrl: 'https://github.com/BGill8',
-    orderRank: 10,
-  },
-  {
-    _id: 'proj-ml-pipeline',
-    title: 'Scalable Cloud Machine Learning Pipeline',
-    description: 'Automated ML pipeline for data preprocessing, distributed model training, hyperparameter optimization, and real-time inference endpoint serving on AWS infrastructure.',
-    technologies: ['AWS SageMaker', 'Python', 'Docker', 'MLOps', 'PostgreSQL'],
-    githubUrl: 'https://github.com/BGill8',
-    orderRank: 20,
-  },
-  {
     _id: 'proj-portfolio',
-    title: 'Modern AI Engineer Portfolio & Headless CMS',
-    description: 'Executive web portfolio built with Next.js App Router, Tailwind CSS, and Sanity CMS featuring dynamic Credly verification integration and optimized responsive layouts.',
-    technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS', 'Sanity CMS'],
-    githubUrl: 'https://github.com/BGill8',
-    orderRank: 30,
+    title: 'Personal Portfolio Website',
+    description: 'I wanted to create a website where I could show my projects off, refine my web development skills, and create something awesome from scratch. This is the website you are currently viewing :)',
+    technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'Vercel', 'CI/CD'],
+    githubUrl: 'https://github.com/BGill8/portfolio-website',
+    liveUrl: 'https://www.brandongill.dev/',
+    orderRank: 6,
   },
 ];
+
